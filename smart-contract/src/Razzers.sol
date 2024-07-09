@@ -133,9 +133,9 @@ contract Razzers is ERC1155, Ownable {
         RapperAttributes storage attrs = users[rapper].rapperAttributes;
         
         // Dynamic update of attributes based on rapoint, votes, and fanBase
-        attrs.flow = 10 + (attrs.rapoint / 100).min(90);
+        attrs.flow = 10 + (attrs.rapoint / 5).min(90);
         attrs.lyrics = 10 + (attrs.votes / 3).min(90);
-        attrs.charisma = 10 + (attrs.fanBase / 10).min(90);
+        attrs.charisma = 10 + (attrs.fanBase / 2).min(90);
         
         updateRavel(rapper);
 
@@ -143,7 +143,7 @@ contract Razzers is ERC1155, Ownable {
     }
 
     function updateRavel(address rapper) internal {
-        uint256 newRavel = (users[rapper].rapperAttributes.rapoint / 1000) + 1;
+        uint256 newRavel = (users[rapper].rapperAttributes.rapoint / 100) + 1;
         if (newRavel > users[rapper].ravel) {
             users[rapper].ravel = newRavel;
         }
@@ -159,7 +159,7 @@ contract Razzers is ERC1155, Ownable {
         emit RapointConverted(msg.sender, amount);
     }
 
-    function updateBattleOutcome(address winner, address loser, uint256 winnerVotes, uint256 loserVotes) public onlyOwner {
+    function updateBattleOutcome(address winner, address loser, uint256 winnerVotes, uint256 loserVotes) external {
         require(users[winner].userType == UserType.Rapper && users[loser].userType == UserType.Rapper, "Both users must be rappers");
 
         users[winner].rapperAttributes.battleWins++;
@@ -202,7 +202,7 @@ contract Razzers is ERC1155, Ownable {
         updateRapperAttributes(loser);
     }
 
-    function battleDrawn(address challenger, address opponent, uint256 challengerVotes, uint256 opponentVotes) external onlyOwner {
+    function battleDrawn(address challenger, address opponent, uint256 challengerVotes, uint256 opponentVotes) external {
         users[challenger].rapperAttributes.votes += challengerVotes;
         users[opponent].rapperAttributes.votes += opponentVotes;
 
@@ -216,7 +216,7 @@ contract Razzers is ERC1155, Ownable {
         updateRapperAttributes(opponent);
     }
 
-    function deductRapoints(address rapper, uint256 amount) public onlyOwner {
+    function deductRapoints(address rapper, uint256 amount) external {
         require(users[rapper].userType == UserType.Rapper, "User is not a rapper");
         
         users[rapper].rapperAttributes.rapoint -= amount;
