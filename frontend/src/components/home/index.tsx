@@ -4,15 +4,32 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { RiFileCopyFill } from 'react-icons/ri'
 import { FaVideo } from 'react-icons/fa'
-
+import singlecoin from "../../../public/singlecoin.png"
 
 
 const UpcomingBattles = () => {
     return (
         <section className='flex flex-col gap-6 items-start mt-3'>
-            <h1 className=' uppercase text-3xl text-gray-100 font-Bebas'>
-                Upcoming Battles
-            </h1>
+
+            <div className='w-full flex justify-between items-center'>
+                <h1 className=' uppercase text-3xl text-gray-100 font-Bebas'>
+                    Upcoming Battles
+                </h1>
+
+                {/* this will be dynamically rendered */}
+                {/* If the user is a fan then this */}
+
+                {/* <div className="w-[118px] h-[48px] rounded-md flex justify-center items-center gap-2 bg-[#28233c] border border-[#FFFFFF]/[10%]">
+                    <div className="w-[32px] h-[32px]">
+                        <Image src={singlecoin} alt='image' width={132} height={128} quality={100} priority className='w-full h-full' />
+                    </div>
+                    <p className='text-[#F3F1FD] text-xl font-Bebas'>98{" "}<span className='text-[#897AF0]'>rkvt</span></p>
+                </div> */}
+
+                {/* If the user is an artiste then this */}
+
+                {/* <button className="w-[148px] h-[44px] bg-gradient-to-t from-[#503BE8] via-[#6957EB] to-[#715FEC] font-Bebas rounded-md text-sm uppercase text-gray-50">create a challenge</button> */}
+            </div>
 
             <main className='w-full grid lg:grid-cols-3 md:grid-cols-2 gap-6'>
                 {

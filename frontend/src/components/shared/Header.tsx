@@ -1,13 +1,13 @@
 'use client'
 import Link from "next/link"
-import Logo from "./Logo"
 import useSound from 'use-sound';
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { IoLogoSoundcloud } from "react-icons/io5";
 import { IoMdVolumeOff } from "react-icons/io";
 
+
 const Header = () => {
-    const [play, { stop }] = useSound("/rapbeat.mp3", { volume: 0.3 });
+    const [play, { stop }] = useSound("/rapbeat.mp3", { volume: 0.3, loop: true, });
 
     const [isPlaying, setIsPlaying] = useState(false);
 
@@ -25,8 +25,8 @@ const Header = () => {
 
     return (
         <header className="w-full z-50 flex justify-between items-center px-4 border border-[#FFFFFF]/[15%] bg-[#28233c] h-[56px] rounded-md">
-            <Link href={`/`} className="flex gap-2 items-center">
-                <Logo className="w-[26px] h-[28px]" />
+            <Link href={`/`} className="flex gap-1 items-center">
+                <Beats />
                 <span className="text-[#BEB6F6] text-2xl font-Reenie">Rap mattaz</span>
             </Link>
 
@@ -52,3 +52,17 @@ const Header = () => {
 }
 
 export default Header
+
+const Beats = () => {
+    return (
+        <div className="anime-beats">
+            <span className="stroke"></span>
+            <span className="stroke"></span>
+            <span className="stroke"></span>
+            <span className="stroke"></span>
+            <span className="stroke"></span>
+            <span className="stroke"></span>
+            <span className="stroke"></span>
+        </div>
+    )
+}
