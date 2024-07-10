@@ -7,7 +7,7 @@ import { IoLogoSoundcloud } from "react-icons/io5";
 import { IoMdVolumeOff } from "react-icons/io";
 
 const Header = () => {
-    const [play, { stop }] = useSound("/rapbeat.mp3", { volume: 0.3 });
+    const [play, { stop }] = useSound("/rapbeat.mp3", { volume: 0.3, loop: true, });
 
     const [isPlaying, setIsPlaying] = useState(false);
 
