@@ -61,7 +61,6 @@ contract BattleZone is ReentrancyGuard {
         require(msg.sender == battle.opponent, "Only the opponent can accept");
         require(battle.status == BattleStatus.Pending, "Battle is not in pending state");
         require(block.timestamp < battle.acceptDeadline, "Accept deadline has passed");
-        require(_battleStartTime > block.timestamp && _battleStartTime <= battle.acceptDeadline, "Invalid battle start time");
 
         battle.startTime = _battleStartTime;
         battle.endTime = _battleStartTime + 5 minutes;

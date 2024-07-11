@@ -16,6 +16,7 @@ contract Razzers is ERC1155, Ownable {
     enum UserType { Fan, Rapper }
 
     struct RapperAttributes {
+        uint256 ravel; // level
         uint256 flow;
         uint256 lyrics;
         uint256 charisma;
@@ -29,8 +30,8 @@ contract Razzers is ERC1155, Ownable {
     struct User {
         address wallet;
         string username;
+        string imageURL;
         UserType userType;
-        uint256 ravel; // level
         address[] following;
         bool hasClaimedRAVT;
         RapperAttributes rapperAttributes;
@@ -65,17 +66,18 @@ contract Razzers is ERC1155, Ownable {
         return tokenId == RAPPER_TOKEN_ID ? rapperURI : fanURI;
     }
 
-    function registerUser(string memory _username, UserType _userType) public {
+    function registerUser(string memory _username, string memory _imageURL, UserType _userType) public {
         require(users[msg.sender].wallet == address(0), "User already registered");
         
         users[msg.sender] = User({
             wallet: msg.sender,
             username: _username,
+            imageURL: _imageURL,
             userType: _userType,
-            ravel: 1,
             following: new address[](0),
             hasClaimedRAVT: false,
             rapperAttributes: RapperAttributes({
+                ravel: 1,
                 flow: 10,
                 lyrics: 10,
                 charisma: 10,
@@ -144,8 +146,8 @@ contract Razzers is ERC1155, Ownable {
 
     function updateRavel(address rapper) internal {
         uint256 newRavel = (users[rapper].rapperAttributes.rapoint / 100) + 1;
-        if (newRavel > users[rapper].ravel) {
-            users[rapper].ravel = newRavel;
+        if (newRavel > users[rapper].rapperAttributes.ravel) {
+            users[rapper].rapperAttributes.ravel = newRavel;
         }
     }
 
@@ -156,7 +158,7 @@ contract Razzers is ERC1155, Ownable {
         users[msg.sender].rapperAttributes.unconvertedRapoint -= amount;
         rakenContract.mint(msg.sender, amount);
 
-        emit RapointConverted(msg.sender, amount);
+        emit RapointConverted(msg.sender, (amount * 10**18));
     }
 
     function updateBattleOutcome(address winner, address loser, uint256 winnerVotes, uint256 loserVotes) external {
@@ -227,5 +229,35 @@ contract Razzers is ERC1155, Ownable {
 
     function isRapper(address _user) public view returns (bool) {
         return users[_user].userType == UserType.Rapper;
+    }
+
+    function getFanDetails(address _fan) external view returns(string memory username, string memory imageURL, UserType userType, address[] memory following) {
+        User storage fanInfo = users[_fan];
+        return (fanInfo.username, fanInfo.imageURL, fanInfo.userType, fanInfo.following);
+    }
+
+    function getRapperInfo(address _rapper) external view returns(
+        uint256 ravel,
+        uint256 flow,
+        uint256 lyrics,
+        uint256 charisma,
+        uint256 battleWins,
+        uint256 fanBase,
+        uint256 votes,
+        uint256 rapoint,
+        uint256 unconvertedRapoint
+    ) {
+        RapperAttributes storage rapperInfo = users[_rapper].rapperAttributes;
+        return(
+            rapperInfo.ravel,
+            rapperInfo.flow,
+            rapperInfo.lyrics,
+            rapperInfo.charisma,
+            rapperInfo.battleWins,
+            rapperInfo.fanBase,
+            rapperInfo.votes,
+            rapperInfo.rapoint,
+            rapperInfo.unconvertedRapoint
+        );
     }
 }
