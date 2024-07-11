@@ -38,8 +38,12 @@ contract Razzers is ERC1155, Ownable {
     }
 
     mapping(address => User) public users;
-    uint256 public constant RAPPER_TOKEN_ID = 1;
-    uint256 public constant FAN_TOKEN_ID = 2;
+    uint256 public constant FAN_TOKEN_ID = 1;
+    uint256 public constant RAPPER_TOKEN_ID = 2;
+
+    mapping(uint256 => uint256) public ravelToTokenId;
+    mapping(uint256 => string) private _tokenURIs;
+    uint256 public nextTokenId = 3;
 
     string public rapperURI;
     string public fanURI;
@@ -49,6 +53,7 @@ contract Razzers is ERC1155, Ownable {
     event ArtistFollowed(address indexed follower, address indexed artist);
     event RAVTClaimed(address indexed user);
     event RapointConverted(address indexed rapper, uint256 amount);
+    event RavelUpdated(address indexed rapper, uint256 newRavel);
     event RapointDeducted(address indexed rapper, uint256 amount);
     event RapperAttributesUpdated(address indexed rapper, uint256 flow, uint256 lyrics, uint256 charisma);
 
@@ -63,7 +68,23 @@ contract Razzers is ERC1155, Ownable {
     }
 
     function uri(uint256 tokenId) public view override returns (string memory) {
-        return tokenId == RAPPER_TOKEN_ID ? rapperURI : fanURI;
+        string memory tokenURI = _tokenURIs[tokenId];
+        
+        // If there's no specific URI for this token, return the default
+        if (bytes(tokenURI).length == 0) {
+            return tokenId == RAPPER_TOKEN_ID ? rapperURI : fanURI;
+        }
+        
+        return tokenURI;
+    }
+
+    function setRavelNFT(uint256 ravel, string memory _uri) public onlyOwner {
+        require(ravel > 0, "Ravel must be greater than 0");
+        if (ravelToTokenId[ravel] == 0) {
+            ravelToTokenId[ravel] = nextTokenId;
+            nextTokenId++;
+        }
+        _tokenURIs[ravelToTokenId[ravel]] = _uri;
     }
 
     function registerUser(string memory _username, string memory _imageURL, UserType _userType) public {
@@ -144,10 +165,23 @@ contract Razzers is ERC1155, Ownable {
         emit RapperAttributesUpdated(rapper, attrs.flow, attrs.lyrics, attrs.charisma);
     }
 
-    function updateRavel(address rapper) internal {
-        uint256 newRavel = (users[rapper].rapperAttributes.rapoint / 100) + 1;
-        if (newRavel > users[rapper].rapperAttributes.ravel) {
-            users[rapper].rapperAttributes.ravel = newRavel;
+    function updateRavel(address _rapper) internal {
+        uint256 newRavel = (users[_rapper].rapperAttributes.rapoint / 100) + 1;
+        uint256 currentRavel = users[_rapper].rapperAttributes.ravel;
+
+        if (newRavel != currentRavel) {
+            // Burn the old NFT
+            if (ravelToTokenId[currentRavel] != 0) {
+                _burn(_rapper, ravelToTokenId[currentRavel], 1);
+            }
+
+            // Mint the new NFT
+            if (ravelToTokenId[newRavel] != 0) {
+                _mint(_rapper, ravelToTokenId[newRavel], 1, "");
+            }
+
+            users[_rapper].rapperAttributes.ravel = newRavel;
+            emit RavelUpdated(_rapper, newRavel);
         }
     }
 
@@ -232,7 +266,10 @@ contract Razzers is ERC1155, Ownable {
     }
 
     function getFanDetails(address _fan) external view returns(string memory username, string memory imageURL, UserType userType, address[] memory following) {
+        require(users[_fan].wallet != address(0), "User not registered");
+        
         User storage fanInfo = users[_fan];
+
         return (fanInfo.username, fanInfo.imageURL, fanInfo.userType, fanInfo.following);
     }
 
@@ -247,6 +284,9 @@ contract Razzers is ERC1155, Ownable {
         uint256 rapoint,
         uint256 unconvertedRapoint
     ) {
+        require(users[_rapper].wallet != address(0), "User not registered");
+        require(users[_rapper].userType == UserType.Rapper, "User is not a rapper");
+
         RapperAttributes storage rapperInfo = users[_rapper].rapperAttributes;
         return(
             rapperInfo.ravel,
