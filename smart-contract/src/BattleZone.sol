@@ -2,11 +2,13 @@
 pragma solidity ^0.8.20;
 
 import "./Razzers.sol";
+import "./RazzersAttributes.sol";
 import "./RAVT.sol";
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 
 contract BattleZone is ReentrancyGuard {
     Razzers public razzerContract;
+    RazzersAttributes public attributesContract;
     RAVT public ravtContract;
 
     enum BattleStatus { Pending, Accepted, Declined, Completed }
@@ -37,9 +39,10 @@ contract BattleZone is ReentrancyGuard {
     event BattleEnded(uint256 indexed battleId, address indexed winner);
     event RapointsPenalty(address indexed rapper, uint256 penaltyAmount);
 
-    constructor(address _razzerContractAddress, address _ravtAddress) {
-        razzerContract = Razzers(_razzerContractAddress);
+    constructor(address _ravtAddress, address _razzerContractAddress, address _attributesAddress) {
         ravtContract = RAVT(_ravtAddress);
+        razzerContract = Razzers(_razzerContractAddress);
+        attributesContract = RazzersAttributes(_attributesAddress);
     }
 
     function createBattle(address _opponent) public nonReentrant {
@@ -84,7 +87,7 @@ contract BattleZone is ReentrancyGuard {
         consecutiveDeclines[msg.sender]++;
         if (consecutiveDeclines[msg.sender] >= 3) {
             uint256 penaltyAmount = 50; // Define an appropriate penalty amount
-            razzerContract.deductRapoints(msg.sender, penaltyAmount);
+            attributesContract.deductRapoints(msg.sender, penaltyAmount);
             consecutiveDeclines[msg.sender] = 0; // Reset after applying penalty
             emit RapointsPenalty(msg.sender, penaltyAmount);
         }
@@ -108,7 +111,7 @@ contract BattleZone is ReentrancyGuard {
         battle.votes[_votedFor]++;
         battle.hasVoted[msg.sender] = true;
 
-        razzerContract.updateRapperAttributes(_votedFor);
+        attributesContract.updateRapperAttributes(_votedFor);
 
         emit VoteCast(_battleId, msg.sender, _votedFor);
     }
@@ -139,9 +142,9 @@ contract BattleZone is ReentrancyGuard {
 
         if (battle.winner != address(0)) {
             address loser = battle.winner == battle.challenger ? battle.opponent : battle.challenger;
-            razzerContract.updateBattleOutcome(battle.winner, loser, winnerVotes, loserVotes);
+            attributesContract.updateBattleOutcome(battle.winner, loser, winnerVotes, loserVotes);
         } else {
-            razzerContract.battleDrawn(battle.challenger, battle.opponent, challengerVotes, opponentVotes); // challengerVotes & opponentVotes are equal
+            attributesContract.battleDrawn(battle.challenger, battle.opponent, challengerVotes, opponentVotes); // challengerVotes & opponentVotes are equal
         }
 
         emit BattleEnded(_battleId, battle.winner);
