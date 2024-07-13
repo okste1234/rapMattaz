@@ -39,14 +39,16 @@ contract BattleZone is ReentrancyGuard {
     event BattleEnded(uint256 indexed battleId, address indexed winner);
     event RapointsPenalty(address indexed rapper, uint256 penaltyAmount);
 
-    constructor(address _ravtAddress, address _razzerContractAddress, address _attributesAddress) {
+    constructor(address _ravtAddress, address _attributesAddress, address _razzerAddress) {
         ravtContract = RAVT(_ravtAddress);
-        razzerContract = Razzers(_razzerContractAddress);
+        razzerContract = Razzers(_razzerAddress);
         attributesContract = RazzersAttributes(_attributesAddress);
     }
 
     function createBattle(address _opponent) public nonReentrant {
+        require(_opponent != msg.sender, "Cannot challenge yourself");
         require(razzerContract.isRapper(msg.sender), "Only rappers can create battles");
+        require(razzerContract.isRapper(_opponent), "Only rappers can be challenged");
         
         battleCounter++;
         Battle storage newBattle = battles[battleCounter];
@@ -119,7 +121,7 @@ contract BattleZone is ReentrancyGuard {
     function endBattle(uint256 _battleId) public nonReentrant {
         Battle storage battle = battles[_battleId];
         require(battle.status == BattleStatus.Accepted, "Battle is not in accepted state");
-        require(block.timestamp >= battle.endTime, "Battle has not ended yet");
+        require(block.timestamp >= battle.endTime, "Battle has not ended");
 
         uint256 challengerVotes = battle.votes[battle.challenger];
         uint256 opponentVotes = battle.votes[battle.opponent];

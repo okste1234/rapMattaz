@@ -81,39 +81,37 @@ contract RazzersAttributes is Ownable {
 
     function updateBattleOutcome(address winner, address loser, uint256 winnerVotes, uint256 loserVotes) external {
         rapperAttributes[winner].battleWins++;
-        rapperAttributes[winner].votes += winnerVotes;
-        rapperAttributes[loser].votes += loserVotes;
-        
+        rapperAttributes[winner].votes = rapperAttributes[winner].votes + winnerVotes;
+        rapperAttributes[loser].votes = rapperAttributes[loser].votes + loserVotes;
+    
         uint256 initialWinnerRapoint = rapperAttributes[winner].rapoint;
         uint256 initialLoserRapoint = rapperAttributes[loser].rapoint;
-        uint256 differenceInRapoint = initialWinnerRapoint > initialLoserRapoint ? (initialWinnerRapoint - initialLoserRapoint) : (initialLoserRapoint - initialWinnerRapoint);
 
-        uint256 winnerRapoint = initialWinnerRapoint + (winnerVotes * 5);
-        uint256 loserRapoint = initialLoserRapoint + (loserVotes * 5);
-        uint256 unconvertedWinnerRapoint = rapperAttributes[winner].unconvertedRapoint + (winnerVotes * 5);
-        uint256 unconvertedLoserRapoint = rapperAttributes[loser].unconvertedRapoint + (loserVotes * 5);
-        
         uint256 rapointChange;
         if (initialWinnerRapoint > initialLoserRapoint) {
-            rapointChange = (differenceInRapoint * 7) / 100;
-        } else if(winnerRapoint < loserRapoint) {
-            rapointChange = (differenceInRapoint * 10) / 100;
+            rapointChange = ((initialWinnerRapoint - initialLoserRapoint) * 20) / 100;
+        } else if (initialWinnerRapoint < initialLoserRapoint) {
+            rapointChange = ((initialLoserRapoint - initialWinnerRapoint) * 25) / 100;
         } else {
             rapointChange = 1;
         }
 
-        rapperAttributes[winner].rapoint = winnerRapoint + rapointChange;
-        rapperAttributes[winner].unconvertedRapoint = unconvertedWinnerRapoint + rapointChange;
+        uint256 winnerRapointGain = (winnerVotes * 5) + rapointChange;
+        uint256 loserRapointGain = loserVotes * 5;
 
-        if (loserRapoint >= rapointChange) {
-            rapperAttributes[loser].rapoint -= rapointChange;
-            if (unconvertedLoserRapoint >= rapointChange) {
-                rapperAttributes[loser].unconvertedRapoint -= rapointChange;
+        rapperAttributes[winner].rapoint = initialWinnerRapoint + winnerRapointGain;
+        rapperAttributes[winner].unconvertedRapoint = rapperAttributes[winner].unconvertedRapoint + winnerRapointGain;
+
+        if (initialLoserRapoint + loserRapointGain > rapointChange) {
+            rapperAttributes[loser].rapoint = initialLoserRapoint + loserRapointGain - rapointChange;
+            if (rapperAttributes[loser].unconvertedRapoint + loserRapointGain >= rapointChange) {
+                rapperAttributes[loser].unconvertedRapoint = rapperAttributes[loser].unconvertedRapoint + loserRapointGain - rapointChange;
             } else {
-                rapperAttributes[loser].unconvertedRapoint = 0;
+                rapperAttributes[loser].unconvertedRapoint = loserRapointGain;
             }
         } else {
-            rapperAttributes[loser].rapoint = 0;
+            rapperAttributes[loser].rapoint = loserRapointGain;
+            rapperAttributes[loser].unconvertedRapoint = loserRapointGain;
         }
 
         updateRapperAttributes(winner);
