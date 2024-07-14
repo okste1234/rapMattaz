@@ -65,46 +65,76 @@ $ anvil --help
 $ cast --help
 ```
 
+## Future Implementations of the updateBattleOutcome using the Chess ELO rating format
+
+### Latest iteration to avoid stack overflow
+
 ```shell
 $ function updateBattleOutcome(address winner, address loser, uint256 winnerVotes, uint256 loserVotes) external {
+        _updateBattleStats(winner, loser, winnerVotes, loserVotes);
+        (int256 winnerRapointChange, int256 loserRapointChange) = _calculateRapointChanges(winner, loser, winnerVotes, loserVotes);
+        _applyRapointChanges(winner, loser, winnerRapointChange, loserRapointChange);
+        _updateAttributes(winner, loser);
+    }
+
+    function _updateBattleStats(address winner, address loser, uint256 winnerVotes, uint256 loserVotes) internal {
         rapperAttributes[winner].battleWins++;
-        rapperAttributes[winner].votes = rapperAttributes[winner].votes + winnerVotes;
-        rapperAttributes[loser].votes = rapperAttributes[loser].votes + loserVotes;
-    
+        rapperAttributes[winner].votes += winnerVotes;
+        rapperAttributes[loser].votes += loserVotes;
+    }
+
+    function _calculateRapointChanges(address winner, address loser, uint256 winnerVotes, uint256 loserVotes) 
+        internal view returns (int256 winnerRapointChange, int256 loserRapointChange) 
+    {
         uint256 initialWinnerRapoint = rapperAttributes[winner].rapoint;
         uint256 initialLoserRapoint = rapperAttributes[loser].rapoint;
 
-        uint256 rapointChange;
-        if (initialWinnerRapoint > initialLoserRapoint) {
-            rapointChange = ((initialWinnerRapoint - initialLoserRapoint) * 7) / 100;
-        } else if (initialWinnerRapoint < initialLoserRapoint) {
-            rapointChange = ((initialLoserRapoint - initialWinnerRapoint) * 10) / 100;
+        uint256 expectedWinnerScore = calculateExpectedScore(initialWinnerRapoint, initialLoserRapoint);
+        uint256 expectedLoserScore = 1000 - expectedWinnerScore;
+
+        uint256 totalVotes = winnerVotes + loserVotes;
+        uint256 actualWinnerScore = (winnerVotes * 1000) / totalVotes;
+        uint256 actualLoserScore = 1000 - actualWinnerScore;
+
+        uint256 kFactor = 32;
+        winnerRapointChange = int256((kFactor * int256(actualWinnerScore - expectedWinnerScore)) / 1000);
+        loserRapointChange = int256((kFactor * int256(actualLoserScore - expectedLoserScore)) / 1000);
+    }
+
+    function _applyRapointChanges(address winner, address loser, int256 winnerRapointChange, int256 loserRapointChange) internal {
+        _updateRapoint(winner, winnerRapointChange);
+        _updateRapoint(loser, loserRapointChange);
+    }
+
+    function _updateRapoint(address rapper, int256 rapointChange) internal {
+        uint256 initialRapoint = rapperAttributes[rapper].rapoint;
+        if (rapointChange > 0) {
+            rapperAttributes[rapper].rapoint = initialRapoint + uint256(rapointChange);
+            rapperAttributes[rapper].unconvertedRapoint += uint256(rapointChange);
         } else {
-            rapointChange = 1;
+            rapperAttributes[rapper].rapoint = initialRapoint > uint256(-rapointChange) ? 
+                initialRapoint - uint256(-rapointChange) : 0;
         }
+    }
 
-        uint256 winnerRapointGain = (winnerVotes * 5) + rapointChange;
-        uint256 loserRapointGain = loserVotes * 5;
-
-        rapperAttributes[winner].rapoint = initialWinnerRapoint + winnerRapointGain;
-        rapperAttributes[winner].unconvertedRapoint = rapperAttributes[winner].unconvertedRapoint + winnerRapointGain;
-
-        if (initialLoserRapoint + loserRapointGain > rapointChange) {
-            rapperAttributes[loser].rapoint = initialLoserRapoint + loserRapointGain - rapointChange;
-            if (rapperAttributes[loser].unconvertedRapoint + loserRapointGain >= rapointChange) {
-                rapperAttributes[loser].unconvertedRapoint = rapperAttributes[loser].unconvertedRapoint + loserRapointGain - rapointChange;
-            } else {
-                rapperAttributes[loser].unconvertedRapoint = loserRapointGain;
-            }
-        } else {
-            rapperAttributes[loser].rapoint = loserRapointGain;
-            rapperAttributes[loser].unconvertedRapoint = loserRapointGain;
-        }
-
+    function _updateAttributes(address winner, address loser) internal {
         updateRapperAttributes(winner);
         updateRapperAttributes(loser);
+    }
+
+    function calculateExpectedScore(uint256 rating1, uint256 rating2) internal pure returns (uint256) {
+        int256 ratingDifference = int256(rating2) - int256(rating1);
+        int256 exponent = ratingDifference > int256(400) ? int256(400) : (ratingDifference < int256(-400) ? int256(-400) : ratingDifference);
+    
+        // Use a fixed-point representation for the exponent calculation
+        uint256 fixedPointFactor = 1000000; // 6 decimal places
+        uint256 denominator = fixedPointFactor + (fixedPointFactor * uint256(exponent) / 400);
+    
+        return (1000 * fixedPointFactor) / denominator;
 $    }
 ```
+
+### Simpler iteration
 
 ```shell
     function updateBattleOutcome(address winner, address loser, uint256 winnerVotes, uint256 loserVotes) external {
