@@ -4,6 +4,7 @@ import "../styles/globals.css";
 import Header from "@/components/shared/Header";
 import Footer from "@/components/shared/Footer";
 import { Web3Modal } from "@/context/web3Modal";
+import { Toaster } from 'sonner';
 
 const inter = Open_Sans({ subsets: ["latin"], weight: ["300", "400", "500", "600", "700", "800"] });
 
@@ -29,6 +30,7 @@ export default function RootLayout({
             </div>
             <Footer />
           </main>
+          <Toaster richColors position="top-right" />
         </Web3Modal>
       </body>
     </html>

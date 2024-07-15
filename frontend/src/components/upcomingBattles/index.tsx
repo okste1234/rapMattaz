@@ -14,6 +14,7 @@ import { IoCloseOutline } from 'react-icons/io5'
 import { AnimatePresence, motion } from 'framer-motion'
 import { modalVariants } from '../shared/Animations'
 import { IoIosNotificationsOutline } from 'react-icons/io'
+import { toast } from "sonner"
 
 
 const UpcomingBattles = () => {
@@ -41,6 +42,12 @@ const UpcomingBattles = () => {
             document.body.style.overflow = 'auto';
         };
     })
+
+    const handleSendingChallenge = () => {
+        setIsModalOpen(!isModalOpen)
+        setIsOpen(!isOpen)
+        toast.success("Challenge Sent");
+    }
 
     return (
         <section className='w-full flex flex-col gap-6 items-start mt-3'>
@@ -136,7 +143,7 @@ const UpcomingBattles = () => {
 
                                 <button onClick={() => setIsModalOpen(!isModalOpen)} className="border mt-4 rounded-lg border-[#897AF0] w-full py-1.5 text-gray-100 font-Bebas">Cancel</button>
 
-                                <button className="border mt-4 rounded-lg border-[#897AF0] bg-gradient-to-t from-[#503BE8] via-[#6957EB] to-[#715FEC] w-full py-1.5 text-gray-100 font-Bebas">Challenge</button>
+                                <button onClick={handleSendingChallenge} type="button" className="border mt-4 rounded-lg border-[#897AF0] bg-gradient-to-t from-[#503BE8] via-[#6957EB] to-[#715FEC] w-full py-1.5 text-gray-100 font-Bebas">Challenge</button>
                             </div>
 
                         </main>
@@ -293,7 +300,7 @@ const UpcomingBattles = () => {
                 <h1 className=' uppercase text-3xl text-gray-100 font-Bebas'>
                     Discover Artistes
                 </h1>
-                <div className='w-full grid lg:grid-cols-4 md:grid-cols-2 gap-6'>
+                <div className='w-full grid lg:grid-cols-4 grid-cols-2 gap-4 md:gap-6'>
                     {
                         artistes.map((art, index) => (
                             <div className='bg-[#FFFFFF]/[5%] p-4 rounded-lg border border-[#FFFFFF]/[10%] backdrop-blur-lg flex flex-col items-center gap-2' key={index}>

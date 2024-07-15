@@ -20,6 +20,7 @@ const Header = () => {
     const [play, { stop }] = useSound("/rapbeat.mp3", { volume: 0.3, loop: true, });
 
     const [isOpen, setIsOpen] = useState<boolean>(false)
+    const [openNotification, setOpenNotification] = useState<boolean>(false)
 
     const [selectedFile, setSelectedFile] = useState<Blob | MediaSource>();
 
@@ -71,8 +72,9 @@ const Header = () => {
 
             <div className="flex justify-center items-center gap-3 md:gap-4">
 
-                <button type="button" className="text-gray-100">
+                <button type="button" className="text-gray-100 relative">
                     <FaBell />
+                    <div className="w-2 h-2 rounded-full bg-rose-500 absolute top-0 right-0"></div>
                 </button>
 
                 <button
