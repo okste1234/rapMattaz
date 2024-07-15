@@ -54,7 +54,13 @@ const Header = () => {
         open()
     }
 
+    useEffect(() => {
+        document.body.style.overflow = isOpen ? 'hidden' : 'auto';
 
+        return () => {
+            document.body.style.overflow = 'auto';
+        };
+    })
 
     return (
         <header className="w-full z-50 flex justify-between items-center px-4 border border-[#FFFFFF]/[15%] bg-[#28233c] h-[56px] rounded-md">

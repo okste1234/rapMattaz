@@ -1,5 +1,5 @@
 'use client'
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { Artiste, Battles } from '../data/battles'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -10,14 +10,37 @@ import rapperNFT from "../../../public/rappermattaznft.jpeg"
 import { FaCrown } from 'react-icons/fa6'
 import flash from "../../../public/flash.png"
 import { RxCaretUp } from 'react-icons/rx'
+import { IoCloseOutline } from 'react-icons/io5'
+import { AnimatePresence, motion } from 'framer-motion'
+import { modalVariants } from '../shared/Animations'
+import { IoIosNotificationsOutline } from 'react-icons/io'
 
 
 const UpcomingBattles = () => {
+    // create challenge modal state
     const [isOpen, setIsOpen] = useState<boolean>(false)
+    // CTA after create challenge modal state
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
 
     const upcomingBattles = useMemo(() => Battles, [])
 
     const artistes = useMemo(() => Artiste, [])
+
+    useEffect(() => {
+        document.body.style.overflow = isOpen ? 'hidden' : 'auto';
+
+        return () => {
+            document.body.style.overflow = 'auto';
+        };
+    })
+
+    useEffect(() => {
+        document.body.style.overflow = isModalOpen ? 'hidden' : 'auto';
+
+        return () => {
+            document.body.style.overflow = 'auto';
+        };
+    })
 
     return (
         <section className='w-full flex flex-col gap-6 items-start mt-3'>
@@ -39,8 +62,87 @@ const UpcomingBattles = () => {
 
                 {/* If the user is an artiste then this */}
 
-                <button className="w-[148px] h-[44px] bg-gradient-to-t from-[#503BE8] via-[#6957EB] to-[#715FEC] font-Bebas rounded-md text-sm md:text-base uppercase text-gray-50">create a challenge</button>
+                <button onClick={() => setIsOpen(!isOpen)} className="w-[148px] h-[44px] bg-gradient-to-t from-[#503BE8] via-[#6957EB] to-[#715FEC] font-Bebas rounded-md text-sm md:text-base uppercase text-gray-50">create a challenge</button>
+
+                {/* Modal for creating a challenge  */}
+                <AnimatePresence>
+                    {isOpen && (
+                        <motion.div
+                            initial="closed"
+                            animate="open"
+                            exit="closed"
+                            variants={modalVariants}
+                            className="md:w-[424px] w-full h-screen border border-[#FFFFFF]/[10%] bg-[#150822] shadow-lg shadow-[#000000]/[61%] fixed top-0 right-0 z-[999] overflow-y-auto rounded-[20px]"
+                        >
+                            <main className="w-full h-full flex flex-col ">
+
+                                <div className="w-full sticky z-20 top-0 py-6 bg-[#150822] md:px-6 px-4 flex justify-between items-center">
+                                    <h1 className="text-gray-100 md:text-3xl text-2xl font-Bebas">create a challenge</h1>
+                                    <button onClick={() => setIsOpen(!isOpen)} type="button" className="text-gray-100">
+                                        <IoCloseOutline className="text-3xl" />
+                                    </button>
+                                </div>
+
+
+                                <div className="w-full md:px-6 px-4 flex flex-col items-start gap-4">
+                                    <h1 className="text-gray-100 md:text-2xl text-xl font-Bebas">select a worthy opponent</h1>
+
+                                    <div className='w-full grid grid-cols-2 gap-4'>
+                                        {
+                                            artistes.map((art, index) => (
+                                                <div className='bg-[#FFFFFF]/[5%] p-4 rounded-lg border border-[#FFFFFF]/[10%] backdrop-blur-lg flex flex-col items-center gap-1' key={index}>
+                                                    <div className='w-[48px] h-[48px] rounded-full overflow-hidden'>
+                                                        <Image src={art.img} alt={art.name} width={376} height={376} quality={100} className='w-full h-full object-cover' priority />
+                                                    </div>
+                                                    <h3 className="text-gray-100 text-center font-Bebas tracking-wider">{art.name}</h3>
+                                                    <span className='border -mt-1.5 text-sm font-Bebas border-[#FFFFFF]/[10%] px-3 py-1 rounded-md text-[#D6D1FA]'>{art.points} -
+                                                        {" "}<span className='text-[#897AF0]'>Ra points</span>
+                                                    </span>
+                                                    <button onClick={() => setIsModalOpen(!isModalOpen)} className="border mt-4 rounded-lg border-[#897AF0] w-full py-1.5 text-gray-100 font-Bebas">Challenge</button>
+                                                </div>
+                                            ))
+                                        }
+                                    </div>
+                                </div>
+
+
+                            </main>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </div>
+
+            {/* CTA modal */}
+            <AnimatePresence>
+                {isModalOpen && (
+                    <motion.div
+                        initial="closed"
+                        animate="open"
+                        exit="closed"
+                        variants={modalVariants}
+                        className=" w-screen h-screen flex justify-center items-center fixed top-0 right-0 z-[9999] bg-[#000000]/[65%]"
+                    >
+                        <main className="w-[95%] md:w-[538px] h-[250px] flex flex-col items-center justify-center border border-[#FFFFFF]/[10%] bg-[#150822] shadow-lg shadow-[#000000]/[61%] px-6 md:px-12 rounded-[20px] gap-5">
+
+                            <div className='w-[28px] h-[28px] rounded-full overflow-hidden flex justify-center items-center bg-[#897AF0] p-1'>
+                                <IoIosNotificationsOutline className="text-xl text-gray-100" />
+                            </div>
+                            <div className='flex flex-col items-center'>
+                                <h2 className='text-gray-100 md:text-3xl text-2xl font-Bebas'>confirm action</h2>
+                                <p className='text-[#D6D1FA] font-light text-sm'>You are about to challenge Phyno?</p>
+                            </div>
+
+                            <div className='w-full grid grid-cols-2 gap-5'>
+
+                                <button onClick={() => setIsModalOpen(!isModalOpen)} className="border mt-4 rounded-lg border-[#897AF0] w-full py-1.5 text-gray-100 font-Bebas">Cancel</button>
+
+                                <button className="border mt-4 rounded-lg border-[#897AF0] bg-gradient-to-t from-[#503BE8] via-[#6957EB] to-[#715FEC] w-full py-1.5 text-gray-100 font-Bebas">Challenge</button>
+                            </div>
+
+                        </main>
+                    </motion.div>
+                )}
+            </AnimatePresence>
 
             <main className='w-full grid lg:grid-cols-2 gap-6'>
                 {
@@ -107,7 +209,7 @@ const UpcomingBattles = () => {
 
                                         <div className='flex flex-col gap-1.5 items-center'>
                                             <div className="md:w-[240px] w-[140px] md:h-[343px] h-[200px] my-8 rounded-lg overflow-hidden border-[3px] border-[#FFFFFF]/[30%] relative group">
-                                                <Image src={rapperNFT} alt='image' width={736} height={736} quality={100} priority className='w-full h-full object-cover' />
+                                                <Image src={rapperNFT} alt='image' width={736} height={736} quality={100} priority className='w-full scale-x-[-1] h-full object-cover' />
 
                                                 <div className=" absolute top-2 left-2 px-2 py-0.5 rounded-md bg-[#0B0532] flex justify-center items-center gap-1">
                                                     <FaCrown className="text-amber-500 -mt-1" />
