@@ -1,12 +1,13 @@
 import Image from "next/image"
 import Logo from "../shared/Logo"
-import { usernft } from "../../../public"
+import rapperNFT from "../../../public/rappermattaznft.jpeg"
+import { FaCrown } from "react-icons/fa6"
 
 
 const RapperNFT = () => {
     return (
         <section className="w-full flex justify-center">
-            <main className="w-full md:w-[540px] md:h-[610px] h-[550px] flex flex-col items-center justify-center bg-[#28233c] md:px-10 px-4 rounded-lg border border-[#FFFFFF]/[10%]">
+            <main className="w-full md:w-[540px] md:h-[680px] h-[600px] flex flex-col items-center justify-center bg-[#28233c] md:px-10 px-4 rounded-lg border border-[#FFFFFF]/[10%]">
 
                 <div className="flex gap-2 items-center">
                     <Logo className="w-[26px] h-[28px]" />
@@ -20,8 +21,14 @@ const RapperNFT = () => {
                     </p>
                 </div>
 
-                <div className='w-[290px] h-[343px]'>
-                    <Image src={usernft} alt='image' width={1622} height={1834} quality={100} priority className='w-full h-full' />
+                <div className="w-[290px] h-[343px] my-8 rounded-lg overflow-hidden border-[3px] border-[#FFFFFF]/[50%] relative">
+                    <Image src={rapperNFT} alt='image' width={736} height={736} quality={100} priority className='w-full h-full object-cover' />
+
+                    <div className=" absolute top-2 left-2 px-2 py-0.5 rounded-md bg-[#0B0532] flex justify-center items-center gap-1">
+                        <FaCrown className="text-amber-500 -mt-1" />
+                        <span className="text-xs font-Bebas text-[#897AF0]">Ravel</span>
+                        <span className="text-gray-100 font-Bebas text-xs">1</span>
+                    </div>
                 </div>
 
 

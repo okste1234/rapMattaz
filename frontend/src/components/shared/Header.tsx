@@ -1,7 +1,7 @@
 'use client'
 import Link from "next/link"
 import useSound from 'use-sound';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaBell, FaCrown } from "react-icons/fa6";
 import { useSwitchNetwork, useWalletInfo, useWeb3Modal, useWeb3ModalAccount } from "@web3modal/ethers/react";
 import { WalletConnected } from "./WalletConnected";
@@ -54,6 +54,8 @@ const Header = () => {
         open()
     }
 
+
+
     return (
         <header className="w-full z-50 flex justify-between items-center px-4 border border-[#FFFFFF]/[15%] bg-[#28233c] h-[56px] rounded-md">
             <Link href={`/`} className="flex gap-1 items-center">
@@ -70,7 +72,7 @@ const Header = () => {
                 <button
                     onClick={walletConnect}
                     type="button"
-                    className={`py-1 border font-Bebas rounded-md text-sm uppercase text-gray-50 ${isConnected ? "px-4 border-[#FFFFFF]/[15%]" : "bg-gradient-to-t from-[#503BE8] via-[#6957EB] to-[#715FEC] border-[#503BE8] px-6"}`}>
+                    className={`py-1 border font-Bebas rounded-md text-sm md:text-base uppercase text-gray-50 ${isConnected ? "px-4 border-[#FFFFFF]/[15%]" : "bg-gradient-to-t from-[#503BE8] via-[#6957EB] to-[#715FEC] border-[#503BE8] px-6"}`}>
                     {
                         isConnected ? <WalletConnected username={`MI Abaga`} icon={profileImg} />
                             : <span>Connect Wallet</span>
@@ -168,6 +170,9 @@ const Header = () => {
                                     <button type="button" className="bg-gradient-to-t from-[#503BE8] via-[#6957EB] to-[#715FEC] border-[#503BE8] px-6 py-1.5 font-Bebas text-gray-100 rounded-md tracking-wide">Purchase token</button>
                                 </div>
                             </div>
+
+
+                            {/* Rapper NFT */}
 
                             <div className="w-full md:px-6 px-4 py-8">
                                 <div className="w-full p-[40px] flex flex-col gap-2 rounded-lg bg-[#FFFFFF]/[5%] border border-[#FFFFFF]/[10%]">

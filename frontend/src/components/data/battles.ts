@@ -9,6 +9,7 @@ export const Battles = [
     battleLink: "live.rapmattaz.com/zxcvvbnm",
     date: "20th aug, 2024",
     time: "4pm",
+    challengerPoints: {},
   },
   {
     challenger: "MI Abaga",
@@ -19,22 +20,27 @@ export const Battles = [
     date: "25th aug, 2024",
     time: "6pm",
   },
+];
+
+export const Artiste = [
   {
-    challenger: "Burna Boy",
-    challengerImg: unicorn,
-    challenged: "Phyno",
-    challengedImg: monkey,
-    battleLink: "live.rapmattaz.com/zxcvvbnm",
-    date: "30th aug, 2024",
-    time: "6:30pm",
+    name: "davido",
+    img: unicorn,
+    points: 5,
   },
   {
-    challenger: "Omah Lay",
-    challengerImg: dinosaur,
-    challenged: "Patoranking",
-    challengedImg: horror,
-    battleLink: "live.rapmattaz.com/zxcvvbnm",
-    date: "1st Sept, 2024",
-    time: "7pm",
+    name: "wizkid",
+    img: dinosaur,
+    points: 10,
+  },
+  {
+    name: "Chike",
+    img: horror,
+    points: 3,
+  },
+  {
+    name: "Burna",
+    img: monkey,
+    points: 7,
   },
 ];
