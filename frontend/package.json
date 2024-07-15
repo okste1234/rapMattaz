@@ -10,7 +10,13 @@
   },
   "dependencies": {
     "@types/howler": "^2.2.11",
+    "@web3modal/ethers": "^5.0.6",
+    "@web3modal/wallet": "^5.0.6",
+    "ethers": "^6.13.1",
+    "framer-motion": "^11.3.2",
     "next": "14.2.4",
+    "pino": "^9.2.0",
+    "pino-pretty": "^11.2.1",
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^5.2.1",
