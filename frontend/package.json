@@ -10,16 +10,26 @@
   },
   "dependencies": {
     "@types/howler": "^2.2.11",
+    "@web3modal/ethers": "^5.0.6",
+    "@web3modal/wallet": "^5.0.6",
+    "ethers": "^6.13.1",
+    "framer-motion": "^11.3.2",
     "next": "14.2.4",
+    "pino": "^9.2.0",
+    "pino-pretty": "^11.2.1",
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^5.2.1",
+    "react-slick": "^0.30.2",
+    "slick-carousel": "^1.8.1",
+    "sonner": "^1.5.0",
     "use-sound": "^4.0.3"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/react-slick": "^0.23.13",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"

@@ -2,9 +2,8 @@ import unicorn from "./unicorn.png";
 import dinosaur from "./dinosaur.png";
 import monkey from "./monkey.png";
 import horror from "./horror.png";
-import artiste from "./artiste.png";
-import fan from "./fan.png";
+import artiste from "./artistTrack.png";
+import fan from "./fansTrack.png";
 import coin from "./coins.png";
-import usernft from "./rappernft.png";
 
-export { unicorn, dinosaur, monkey, horror, artiste, fan, coin, usernft };
+export { unicorn, dinosaur, monkey, horror, artiste, fan, coin };
