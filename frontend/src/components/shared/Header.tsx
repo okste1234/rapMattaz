@@ -15,6 +15,7 @@ import Image from "next/image";
 import { FiEdit } from "react-icons/fi";
 import singlecoin from "../../../public/singlecoin.png"
 import rapperNFT from "../../../public/rappermattaznft.jpeg"
+import { IoIosNotificationsOutline } from "react-icons/io";
 
 const Header = () => {
     const [play, { stop }] = useSound("/rapbeat.mp3", { volume: 0.3, loop: true, });
@@ -72,7 +73,7 @@ const Header = () => {
 
             <div className="flex justify-center items-center gap-3 md:gap-4">
 
-                <button type="button" className="text-gray-100 relative">
+                <button onClick={() => setOpenNotification(!openNotification)} type="button" className="text-gray-100 relative">
                     <FaBell />
                     <div className="w-2 h-2 rounded-full bg-rose-500 absolute top-0 right-0"></div>
                 </button>
@@ -89,6 +90,7 @@ const Header = () => {
 
             </div>
 
+            {/* profile settings */}
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
@@ -227,13 +229,66 @@ const Header = () => {
                 )}
             </AnimatePresence>
 
+
+            {/* notifications */}
+            <AnimatePresence>
+                {openNotification && (
+                    <motion.div
+                        initial="closed"
+                        animate="open"
+                        exit="closed"
+                        variants={modalVariants}
+                        className="md:w-[424px] w-full h-[400px] border border-[#FFFFFF]/[10%] bg-[#150822] shadow-lg shadow-[#000000]/[61%] fixed top-[90px] md:right-[190px] right-0 z-[999] overflow-y-auto rounded-[20px]"
+                    >
+                        <main className="w-full h-full flex flex-col ">
+
+                            <div className="w-full py-4 bg-[#150822] md:px-6 px-4 flex justify-between items-center">
+                                <h1 className="text-gray-100 md:text-xl text-lg font-Bebas">Notifications</h1>
+                                <button onClick={() => setOpenNotification(!openNotification)} type="button" className="text-gray-100">
+                                    <IoCloseOutline className="text-2xl" />
+                                </button>
+                            </div>
+
+                            <main className="flex w-full flex-col gap-3">
+                                {/* notification */}
+                                <div className="w-full px-6">
+                                    <div className="w-full md:px-4 px-2 py-3 flex flex-col gap-2 bg-[#FFFFFF]/[6%] rounded-md border border-[#FFFFFF]/[15%]">
+                                        <div className="flex items-center gap-2">
+                                            <div className='w-[20px] h-[20px] rounded-full overflow-hidden flex justify-center items-center bg-[#897AF0] p-1'>
+                                                <IoIosNotificationsOutline className="text-lg text-gray-100" />
+                                            </div>
+                                            <h3 className="text-gray-100 text-sm capitalize ">Challenge accepted</h3>
+                                        </div>
+                                        <p className="text-[0.75rem] text-gray-200">Broadcastar accepted your battle challenge. Challenge was scheduled for 12th Jun, 2024; 5PM WAT. </p>
+                                    </div>
+                                </div>
+
+                                {/* notification */}
+                                <div className="w-full px-6">
+                                    <div className="w-full md:px-4 px-2 py-3 flex flex-col gap-2 bg-[#FFFFFF]/[6%] rounded-md border border-[#FFFFFF]/[15%]">
+                                        <div className="flex items-center gap-2">
+                                            <div className='w-[20px] h-[20px] rounded-full overflow-hidden flex justify-center items-center bg-[#897AF0] p-1'>
+                                                <IoIosNotificationsOutline className="text-lg text-gray-100" />
+                                            </div>
+                                            <h3 className="text-gray-100 text-sm capitalize ">Challenge accepted</h3>
+                                        </div>
+                                        <p className="text-[0.75rem] text-gray-200">Broadcastar accepted your battle challenge. Challenge was scheduled for 12th Jun, 2024; 5PM WAT. </p>
+                                    </div>
+                                </div>
+                            </main>
+
+                        </main>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
         </header>
     )
 }
 
 export default Header
 
-const Beats = () => {
+export const Beats = () => {
     return (
         <div className="anime-beats">
             <span className="stroke"></span>
