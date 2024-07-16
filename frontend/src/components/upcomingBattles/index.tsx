@@ -6,8 +6,7 @@ import Link from 'next/link'
 import { RiFileCopyFill } from 'react-icons/ri'
 import { FaVideo } from 'react-icons/fa'
 import singlecoin from "../../../public/singlecoin.png"
-import rapperNFT from "../../../public/rappermattaznft.jpeg"
-import { FaCrown } from 'react-icons/fa6'
+import rapperNFT from "../../../public/rapperNFT.png"
 import flash from "../../../public/flash.png"
 import { RxCaretUp } from 'react-icons/rx'
 import { IoCloseOutline } from 'react-icons/io5'
@@ -51,12 +50,7 @@ const UpcomingBattles = () => {
 
     return (
         <section className='w-full flex flex-col gap-6 items-start mt-3'>
-
-            <div className='w-full flex justify-between items-center'>
-                <h1 className=' uppercase text-3xl text-gray-100 font-Bebas'>
-                    Upcoming Battles
-                </h1>
-
+            <div className='w-full flex justify-end'>
                 {/* this will be dynamically rendered */}
                 {/* If the user is a fan then this */}
 
@@ -119,6 +113,137 @@ const UpcomingBattles = () => {
                 </AnimatePresence>
             </div>
 
+
+            {/* sent challenge or unaccepted challenge */}
+
+            <div className='w-full flex justify-between items-center'>
+                <h1 className=' uppercase text-3xl text-gray-100 font-Bebas'>
+                    Challenges Sent
+                </h1>
+            </div>
+
+            <main className='w-full grid lg:grid-cols-2 gap-6'>
+                {
+                    upcomingBattles.slice(0, 1).map((bat, index) => (
+                        <div className='flex flex-col md:h-[459px] h-[296px] border border-[#1C0D82] rounded-[12px] overflow-hidden cursor-pointer ' key={index}>
+                            <div className='w-full md:h-[383px] h-[220px] bg-rap-battlebg bg-cover bg-center bg-no-repeat relative'>
+                                <div className=' absolute top-0 left-0 w-full h-full bg-[#070420]/[82%] flex flex-col items-center justify-center gap-4'>
+                                    <div className='flex justify-center gap-1 items-center'>
+                                        <div className='flex flex-col gap-1.5 items-center'>
+                                            <div className="md:w-[233px] w-[140px] md:h-[343px] h-[200px] my-8 overflow-hidden relative group">
+                                                <Image src={rapperNFT} alt='image' width={1184} height={1396} quality={100} priority className='w-full h-full' />
+
+                                                <div className='absolute bottom-0 left-0 w-full md:px-3 px-1 md:pb-3 pb-1'>
+                                                    <div className='w-full bg-[#FFFFFF]/[10%] md:px-2 px-1 md:pt-2 pt-1 flex flex-col justify-start items-start md:h-[50px] h-[35px] md:group-hover:h-[210px] group-hover:h-[190px] overflow-hidden transition-all duration-500 rounded-lg backdrop-blur-lg'>
+                                                        <div className='w-full flex rounded-xl px-2 py-1 items-center justify-between bg-[#FFFFFF]/[20%]'>
+                                                            <div className='flex items-center gap-1.5'>
+                                                                <span className="md:w-[28px] w-[20px] md:h-[28px] h-[20px] rounded-full overflow-hidden">
+                                                                    <Image src={bat.challengerImg} alt={bat.challenger} className="w-full h-full" width={160} height={160} quality={100} priority />
+                                                                </span>
+                                                                <span className='text-white text-sm md:text-base font-Bebas'>{bat.challenger}</span>
+                                                            </div>
+                                                            <span className='text-white font-Bebas'><RxCaretUp className='text-xl font-bold' /></span>
+                                                        </div>
+                                                        <ul className="w-full flex flex-col px-2 pt-[10px] text-white list-none">
+                                                            <li className="w-full flex justify-between items-center  font-Bebas text-base">
+                                                                <span >Rap points</span>
+                                                                <span>3</span>
+                                                            </li>
+                                                            <li className="w-full flex justify-between items-center font-Bebas text-base">
+                                                                <span >Battle wins</span>
+                                                                <span>98</span>
+                                                            </li>
+                                                            <li className="w-full flex justify-between items-center font-Bebas text-base">
+                                                                <span >fan base</span>
+                                                                <span>98</span>
+                                                            </li>
+                                                            <li className="w-full flex justify-between items-center font-Bebas text-base">
+                                                                <span >lyrics</span>
+                                                                <span>98</span>
+                                                            </li>
+                                                            <li className="w-full flex justify-between items-center font-Bebas text-base">
+                                                                <span >charisma</span>
+                                                                <span>98</span>
+                                                            </li>
+                                                            <li className="w-full flex justify-between items-center font-Bebas text-base">
+                                                                <span >flow</span>
+                                                                <span>98</span>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className=" relative w-[51px] h-[100px]">
+                                            <Image src={flash} alt='image' width={204} height={401} quality={100} priority className='w-full h-full' />
+                                            <span className=' absolute top-7 left-3 font-Bebas text-[#F3F1FD] text-4xl'>Vs</span>
+                                        </div>
+
+                                        <div className='flex flex-col gap-1.5 items-center'>
+                                            <div className="md:w-[233px] w-[140px] md:h-[343px] h-[200px] my-8 overflow-hidden relative group">
+                                                <Image src={rapperNFT} alt='image' width={1184} height={1396} quality={100} priority className='w-full h-full' />
+
+                                                <div className='absolute bottom-0 left-0 w-full md:px-3 px-1 md:pb-3 pb-1'>
+                                                    <div className='w-full bg-[#FFFFFF]/[10%] md:px-2 px-1 md:pt-2 pt-1 flex flex-col justify-start items-start md:h-[50px] h-[35px] md:group-hover:h-[210px] group-hover:h-[190px] overflow-hidden transition-all duration-500 rounded-lg backdrop-blur-lg'>
+                                                        <div className='w-full flex rounded-xl px-2 py-1 items-center justify-between bg-[#FFFFFF]/[20%]'>
+                                                            <div className='flex items-center gap-1.5'>
+                                                                <span className="md:w-[28px] w-[20px] md:h-[28px] h-[20px] rounded-full overflow-hidden">
+                                                                    <Image src={bat.challengedImg} alt={bat.challenged} className="w-full h-full" width={160} height={160} quality={100} priority />
+                                                                </span>
+                                                                <span className='text-white text-sm md:text-base font-Bebas'>{bat.challenged}</span>
+                                                            </div>
+                                                            <span className='text-white font-Bebas'><RxCaretUp className='text-xl font-bold' /></span>
+                                                        </div>
+                                                        <ul className="w-full flex flex-col px-2 pt-[10px] text-white list-none">
+                                                            <li className="w-full flex justify-between items-center  font-Bebas text-base">
+                                                                <span >Rap points</span>
+                                                                <span>3</span>
+                                                            </li>
+                                                            <li className="w-full flex justify-between items-center font-Bebas text-base">
+                                                                <span >Battle wins</span>
+                                                                <span>98</span>
+                                                            </li>
+                                                            <li className="w-full flex justify-between items-center font-Bebas text-base">
+                                                                <span >fan base</span>
+                                                                <span>98</span>
+                                                            </li>
+                                                            <li className="w-full flex justify-between items-center font-Bebas text-base">
+                                                                <span >lyrics</span>
+                                                                <span>98</span>
+                                                            </li>
+                                                            <li className="w-full flex justify-between items-center font-Bebas text-base">
+                                                                <span >charisma</span>
+                                                                <span>98</span>
+                                                            </li>
+                                                            <li className="w-full flex justify-between items-center font-Bebas text-base">
+                                                                <span >flow</span>
+                                                                <span>98</span>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='h-[76px] flex flex-col justify-center items-center  w-full bg-gradient-radial from-[#190C73] to-[#0B0533] px-[20px]'>
+
+                                <button type='button' className="w-full h-[32px] flex items-center justify-center bg-transparent border border-[#7464ED] text-sm uppercase font-Bebas hover:tracking-widest transition-all duration-200 rounded-md text-gray-50">
+                                    Challenge pending
+                                </button>
+                            </div>
+                        </div>
+                    ))
+                }
+            </main>
+
+            <div className='w-full flex justify-between items-center'>
+                <h1 className=' uppercase text-3xl text-gray-100 font-Bebas'>
+                    Upcoming Battles
+                </h1>
+            </div>
+
             {/* CTA modal */}
             <AnimatePresence>
                 {isModalOpen && (
@@ -159,14 +284,8 @@ const UpcomingBattles = () => {
                                 <div className=' absolute top-0 left-0 w-full h-full bg-[#070420]/[82%] flex flex-col items-center justify-center gap-4'>
                                     <div className='flex justify-center gap-1 items-center'>
                                         <div className='flex flex-col gap-1.5 items-center'>
-                                            <div className="md:w-[240px] w-[140px] md:h-[343px] h-[200px] my-8 rounded-lg overflow-hidden border-[3px] border-[#FFFFFF]/[30%] relative group">
-                                                <Image src={rapperNFT} alt='image' width={736} height={736} quality={100} priority className='w-full h-full object-cover' />
-
-                                                <div className=" absolute top-2 left-2 px-2 py-0.5 rounded-md bg-[#0B0532] flex justify-center items-center gap-1">
-                                                    <FaCrown className="text-amber-500 -mt-1" />
-                                                    <span className="text-xs font-Bebas text-[#897AF0]">Ravel</span>
-                                                    <span className="text-gray-100 font-Bebas text-xs">1</span>
-                                                </div>
+                                            <div className="md:w-[233px] w-[140px] md:h-[343px] h-[200px] my-8 overflow-hidden relative group">
+                                                <Image src={rapperNFT} alt='image' width={1184} height={1396} quality={100} priority className='w-full h-full' />
 
                                                 <div className='absolute bottom-0 left-0 w-full md:px-3 px-1 md:pb-3 pb-1'>
                                                     <div className='w-full bg-[#FFFFFF]/[10%] md:px-2 px-1 md:pt-2 pt-1 flex flex-col justify-start items-start md:h-[50px] h-[35px] md:group-hover:h-[210px] group-hover:h-[190px] overflow-hidden transition-all duration-500 rounded-lg backdrop-blur-lg'>
@@ -175,11 +294,11 @@ const UpcomingBattles = () => {
                                                                 <span className="md:w-[28px] w-[20px] md:h-[28px] h-[20px] rounded-full overflow-hidden">
                                                                     <Image src={bat.challengerImg} alt={bat.challenger} className="w-full h-full" width={160} height={160} quality={100} priority />
                                                                 </span>
-                                                                <span className='text-[#1E0C97] text-sm md:text-base font-Bebas'>{bat.challenger}</span>
+                                                                <span className='text-white text-sm md:text-base font-Bebas'>{bat.challenger}</span>
                                                             </div>
-                                                            <span className='text-[#1E0C97] font-Bebas'><RxCaretUp className='text-xl font-bold' /></span>
+                                                            <span className='text-white font-Bebas'><RxCaretUp className='text-xl font-bold' /></span>
                                                         </div>
-                                                        <ul className="w-full flex flex-col px-2 pt-[10px] text-[#1E0C97] list-none">
+                                                        <ul className="w-full flex flex-col px-2 pt-[10px] text-white list-none">
                                                             <li className="w-full flex justify-between items-center  font-Bebas text-base">
                                                                 <span >Rap points</span>
                                                                 <span>3</span>
@@ -215,14 +334,8 @@ const UpcomingBattles = () => {
                                         </div>
 
                                         <div className='flex flex-col gap-1.5 items-center'>
-                                            <div className="md:w-[240px] w-[140px] md:h-[343px] h-[200px] my-8 rounded-lg overflow-hidden border-[3px] border-[#FFFFFF]/[30%] relative group">
-                                                <Image src={rapperNFT} alt='image' width={736} height={736} quality={100} priority className='w-full scale-x-[-1] h-full object-cover' />
-
-                                                <div className=" absolute top-2 left-2 px-2 py-0.5 rounded-md bg-[#0B0532] flex justify-center items-center gap-1">
-                                                    <FaCrown className="text-amber-500 -mt-1" />
-                                                    <span className="text-xs font-Bebas text-[#897AF0]">Ravel</span>
-                                                    <span className="text-gray-100 font-Bebas text-xs">1</span>
-                                                </div>
+                                            <div className="md:w-[233px] w-[140px] md:h-[343px] h-[200px] my-8 overflow-hidden relative group">
+                                                <Image src={rapperNFT} alt='image' width={1184} height={1396} quality={100} priority className='w-full h-full' />
 
                                                 <div className='absolute bottom-0 left-0 w-full md:px-3 px-1 md:pb-3 pb-1'>
                                                     <div className='w-full bg-[#FFFFFF]/[10%] md:px-2 px-1 md:pt-2 pt-1 flex flex-col justify-start items-start md:h-[50px] h-[35px] md:group-hover:h-[210px] group-hover:h-[190px] overflow-hidden transition-all duration-500 rounded-lg backdrop-blur-lg'>
@@ -231,11 +344,11 @@ const UpcomingBattles = () => {
                                                                 <span className="md:w-[28px] w-[20px] md:h-[28px] h-[20px] rounded-full overflow-hidden">
                                                                     <Image src={bat.challengedImg} alt={bat.challenged} className="w-full h-full" width={160} height={160} quality={100} priority />
                                                                 </span>
-                                                                <span className='text-[#1E0C97] text-sm md:text-base font-Bebas'>{bat.challenged}</span>
+                                                                <span className='text-white text-sm md:text-base font-Bebas'>{bat.challenged}</span>
                                                             </div>
-                                                            <span className='text-[#1E0C97] font-Bebas'><RxCaretUp className='text-xl font-bold' /></span>
+                                                            <span className='text-white font-Bebas'><RxCaretUp className='text-xl font-bold' /></span>
                                                         </div>
-                                                        <ul className="w-full flex flex-col px-2 pt-[10px] text-[#1E0C97] list-none">
+                                                        <ul className="w-full flex flex-col px-2 pt-[10px] text-white list-none">
                                                             <li className="w-full flex justify-between items-center  font-Bebas text-base">
                                                                 <span >Rap points</span>
                                                                 <span>3</span>

@@ -1,9 +1,12 @@
+'use client'
 import React from 'react'
 import Logo from '../shared/Logo'
 import Image from 'next/image'
 import { coin } from '../../../public'
+import { useRouter } from 'next/navigation'
 
 const FansToken = () => {
+    const router = useRouter()
     return (
         <section className="w-full flex justify-center">
             <main className="w-full md:w-[540px] md:h-[535px] h-[490px] flex flex-col items-center justify-center gap-4 bg-[#28233c] md:px-10 px-4 rounded-lg border border-[#FFFFFF]/[10%]">
@@ -26,7 +29,7 @@ const FansToken = () => {
                 </div>
 
 
-                <button className="w-full h-[52px] flex items-center justify-center gap-1 bg-gradient-to-t from-[#503BE8] via-[#6957EB] to-[#715FEC] uppercase font-Bebas hover:tracking-widest transition-all duration-200 rounded-md text-gray-50">
+                <button onClick={() => router.push('/claimnft')} className="w-full h-[52px] flex items-center justify-center gap-1 bg-gradient-to-t from-[#503BE8] via-[#6957EB] to-[#715FEC] uppercase font-Bebas hover:tracking-widest transition-all duration-200 rounded-md text-gray-50">
                     claim token
                 </button>
             </main>

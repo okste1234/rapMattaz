@@ -1,6 +1,5 @@
 'use client'
 import Link from "next/link"
-import useSound from 'use-sound';
 import { useEffect, useState } from "react";
 import { FaBell, FaCrown } from "react-icons/fa6";
 import { useSwitchNetwork, useWalletInfo, useWeb3Modal, useWeb3ModalAccount } from "@web3modal/ethers/react";
@@ -14,11 +13,11 @@ import { LiaSignOutAltSolid } from "react-icons/lia";
 import Image from "next/image";
 import { FiEdit } from "react-icons/fi";
 import singlecoin from "../../../public/singlecoin.png"
-import rapperNFT from "../../../public/rappermattaznft.jpeg"
+import rapperNFT from "../../../public/rapperNFT.png"
 import { IoIosNotificationsOutline } from "react-icons/io";
 
 const Header = () => {
-    const [play, { stop }] = useSound("/rapbeat.mp3", { volume: 0.3, loop: true, });
+
 
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const [openNotification, setOpenNotification] = useState<boolean>(false)
@@ -38,12 +37,10 @@ const Header = () => {
     const walletConnect = () => {
         if (!isConnected) {
             open()
-            play()
         } else if (isConnected && chainId !== SUPPORTED_CHAIN_ID) {
             switchNetwork(SUPPORTED_CHAIN_ID)
         } else {
             setIsOpen(!isOpen)
-            stop()
         }
     }
 
@@ -124,9 +121,9 @@ const Header = () => {
 
                             {/* profile update */}
                             <div className="flex flex-col gap-4 md:px-6 px-4 py-6">
-                                <h1 className="text-gray-100 md:text-2xl text-xl font-Bebas">MI Abaga</h1>
+
                                 <div className="flex gap-6 items-center">
-                                    <div className="w-[74px] h-[74px] rounded-full relative ">
+                                    <div className="w-[80px] h-[80px] rounded-full relative ">
                                         {selectedFile ? (
                                             <Image
                                                 src={URL.createObjectURL(selectedFile)}
@@ -154,15 +151,19 @@ const Header = () => {
                                             <FiEdit />
                                         </label>
                                     </div>
-                                    <div className="flex flex-col">
-                                        <h1 className="text-gray-100 md:text-lg text-base font-Bebas font-light">
-                                            Profile Picture
+                                    <div className="flex flex-col gap-1">
+                                        <h1 className="text-gray-100 md:text-xl text-lg font-Bebas font-light">
+                                            MI Abaga
                                         </h1>
-                                        <small className="text-[#D6D1FA] -mt-1 mb-2 text-sm font-light">PNG or JPG (MAX. 300x300px)</small>
+                                        <div className="flex gap-4 -mt-1">
+                                            <p className="text-[#D6D1FA] font-light text-sm"><span className="font-semibold text-white">15k</span> followers</p>
+                                            <p className="text-[#D6D1FA] font-light text-sm"><span className="font-semibold text-white">100</span> following</p>
+                                        </div>
                                         <button type="button"
-                                            className=" flex items-center justify-center cursor-pointer w-[95px] h-[32px] border-[0.5px] border-[#7464ED] font-Bebas tracking-wider text-gray-100 rounded-md">
+                                            className=" flex items-center justify-center cursor-pointer w-[95px] h-[32px] border-[0.5px] border-[#7464ED] font-Bebas tracking-wider text-gray-100 text-sm rounded-md">
                                             update image
                                         </button>
+                                        <small className="text-[#D6D1FA] text-[0.65rem] font-light">PNG or JPG (MAX. 300x300px)</small>
                                     </div>
                                 </div>
                             </div>
@@ -186,14 +187,8 @@ const Header = () => {
 
                             <div className="w-full md:px-6 px-4 py-8">
                                 <div className="w-full p-[40px] flex flex-col gap-2 rounded-lg bg-[#FFFFFF]/[5%] border border-[#FFFFFF]/[10%]">
-                                    <div className="w-full h-[343px] rounded-lg overflow-hidden border-[3px] border-[#FFFFFF]/[50%] relative">
-                                        <Image src={rapperNFT} alt='image' width={736} height={736} quality={100} priority className='w-full h-full object-cover' />
-
-                                        <div className=" absolute top-2 left-2 px-2 py-0.5 rounded-md bg-[#0B0532] flex justify-center items-center gap-1">
-                                            <FaCrown className="text-amber-500 -mt-1" />
-                                            <span className="text-xs font-Bebas text-[#897AF0]">Ravel</span>
-                                            <span className="text-gray-100 font-Bebas text-xs">1</span>
-                                        </div>
+                                    <div className="w-full h-[343px]">
+                                        <Image src={rapperNFT} alt='image' width={1184} height={1396} quality={100} priority className='w-full h-full' />
                                     </div>
                                     <h1 className="text-gray-100 font-Bebas md:text-2xl text-xl text-center">MI Abaga</h1>
                                     <ul className="w-full flex flex-col gap-2 px-3 list-none">

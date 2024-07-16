@@ -3,6 +3,7 @@ import { useCallback, useState } from "react"
 import Logo from "../shared/Logo"
 import Image from "next/image";
 import placeholder from "../../../public/placeholder.png"
+import { useRouter } from "next/navigation";
 
 
 const CreateAccount = () => {
@@ -12,6 +13,8 @@ const CreateAccount = () => {
     const handleSelectImage = ({ target }: { target: any }) => {
         setSelectedFile(target.files[0]);
     };
+
+    const router = useRouter()
 
 
     return (
@@ -77,7 +80,7 @@ const CreateAccount = () => {
                     <input type="text" name="username" id="username" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Enter your username" className="w-full py-2.5 px-3 border border-[#FFFFFF]/[10%] rounded-md bg-transparent font-extralight text-sm placeholder:text-[#ffffff]/[40%] transition-all duration-200 focus:border-[#ffffff]/[30%] text-gray-100 outline-none" />
                 </div>
 
-                <button className="w-full h-[52px] flex items-center justify-center gap-1 bg-gradient-to-t from-[#503BE8] via-[#6957EB] to-[#715FEC] uppercase font-Bebas hover:tracking-widest transition-all duration-200 rounded-md text-gray-50">
+                <button onClick={() => router.push('/choosetrack')} className="w-full h-[52px] flex items-center justify-center gap-1 bg-gradient-to-t from-[#503BE8] via-[#6957EB] to-[#715FEC] uppercase font-Bebas hover:tracking-widest transition-all duration-200 rounded-md text-gray-50">
                     Next
                 </button>
             </main>

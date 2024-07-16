@@ -4,6 +4,7 @@ import { artiste, fan } from "../../../public"
 import Logo from "../shared/Logo"
 import { useState } from "react"
 import { FaCircleCheck } from "react-icons/fa6"
+import { useRouter } from "next/navigation"
 
 
 const trackList = [
@@ -25,6 +26,7 @@ const Tracks = () => {
         setActiveSelective(userTrack);
     };
 
+    const router = useRouter()
     return (
         <section className="w-full flex justify-center">
             <main className="w-full md:w-[540px] md:h-[609px] h-[550px] flex flex-col items-center justify-center gap-4 bg-[#28233c] md:px-10 px-4 rounded-lg border border-[#FFFFFF]/[10%]">
@@ -67,7 +69,7 @@ const Tracks = () => {
 
 
 
-                <button className="w-full h-[52px] flex items-center justify-center gap-1 bg-gradient-to-t from-[#503BE8] via-[#6957EB] to-[#715FEC] uppercase font-Bebas hover:tracking-widest transition-all duration-200 rounded-md text-gray-50">
+                <button onClick={() => router.push('/claimtoken')} className="w-full h-[52px] flex items-center justify-center gap-1 bg-gradient-to-t from-[#503BE8] via-[#6957EB] to-[#715FEC] uppercase font-Bebas hover:tracking-widest transition-all duration-200 rounded-md text-gray-50">
                     select track
                 </button>
             </main>
