@@ -2,6 +2,8 @@
 
 RapMattaz is an innovative platform for on-chain rap battles, bringing artists and fans together in a decentralized and engaging way. Built on Warpcast (Farcaster frames) and the Base protocol, RapMattaz allows users to register as artists or fans, participate in live rap battles, and vote for their favorite artists.
 
+<img src"https://github.com/okste1234/rapMattaz/blob/2d861a6d57deafa0f8aadcaeeaa3608e03ff31a0/RapMattaz.png" width="100%">
+
 ## Features
 
 ### User Management
