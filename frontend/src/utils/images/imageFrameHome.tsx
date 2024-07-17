@@ -13,7 +13,7 @@ const generateImageSvg = async (): Promise<string> => {
         <div
             style={{
                 background: "rgba(13, 13, 15, 0.99)",
-                backgroundImage: `url(${envVars.hostUrl}/bgCover11.jpeg)`,
+                backgroundImage: `url(${envVars.hostUrl}/bgCover12.jpeg)`,
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "100% 100%",
                 display: "flex",
