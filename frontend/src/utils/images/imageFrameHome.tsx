@@ -55,7 +55,7 @@ const generateImageSvg = async (): Promise<string> => {
                     paddingTop:"20px"
                 }}
             >
-                <div
+                {/* <div
                     style={{
                         display: "flex",
                         flexDirection: "column",
@@ -66,7 +66,7 @@ const generateImageSvg = async (): Promise<string> => {
                         src={`${envVars.hostUrl}/fanNFT1.png`}
                         style={{ width: "220px", height: "220px" }}
                     />
-                </div>
+                </div> */}
             </div>
             <div
                 style={{
