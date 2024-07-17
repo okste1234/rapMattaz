@@ -3,10 +3,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { envVars } from "@/utils/env";
 import { Metadata } from "next";
-// import { generateHomeImage } from "@/utils/images/imageFrameHome";
-
-// // Synchronously generate the base64 image string
-// const base64Image = generateHomeImage();
 
 export const metadata: Metadata = {
     title: "Rap Mattaz Farcaster Frame",
@@ -19,9 +15,9 @@ export const metadata: Metadata = {
     other: {
         "fc:frame": "vNext",
         "fc:frame:image": `${envVars.hostUrl}/RapMattaz.png`,
-        "fc:frame:button:1:post_url": `${envVars.hostUrl}/api/signinFrame`,
+        "fc:frame:button:1:post_url": `${envVars.hostUrl}/api/signinframe`,
         "fc:frame:button:1": "Battle Update",
-        "fc:frame:button:2:post_url": `${envVars.hostUrl}/api/signinFrame`,  
+        "fc:frame:button:2:post_url": `${envVars.hostUrl}/api/signinframe`,  
         "fc:frame:button:2": "Sign In",
         "fc:frame:button:3": `Join Live`, 
         "fc:frame:button:3:action": "link",

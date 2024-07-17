@@ -19,13 +19,14 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
                 content=${envVars.hostUrl}/RapMattaz.png
               />
               <meta property="fc:frame" content="vNext" />
-              <meta
+               <meta
                 property="fc:frame:image"
                 content="data:image/png;base64,${base64Image}"
               />
-              <meta property="fc:frame:button:1" content="sign in" />
+
               <meta name="fc:frame:button:1:action" content="link" />
               <meta name="fc:frame:button:1:target" content=${envVars.hostUrl}/signin />
+              <meta property="fc:frame:button:1" content="sign in" />
             </head>
             <body>
               <p>"Rap Mattaz Farcaster Frame</p>
