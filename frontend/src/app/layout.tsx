@@ -19,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} w-full h-screen bg-hero-pattern bg-no-repeat bg-center bg-cover relative `}>
+      <body className={`${inter.className} w-full`}>
         <Web3Modal>
           {children}
           <Toaster richColors position="top-right" />

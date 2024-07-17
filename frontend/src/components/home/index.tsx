@@ -17,13 +17,13 @@ const LandingPage = () => {
             <main className="h-screen w-full overflow-hidden flex justify-center items-start relative">
                 <div className="h-[80%] w-full md:w-[50%] mt-12 rounded-full relative">
                     {/* purple circle */}
-                    <div className="w-[120%] h-[120%] rounded-full bg-gradient-radial absolute -top-[30%] -left-[10%] from-[#a21caf] via-transparent to-transparent blur-3xl"></div>
+                    <div className="w-[120%] h-[120%] rounded-full bg-gradient-radial absolute -top-[30%] -left-[10%] from-[#a21caf] via-transparent to-transparent blur-3xl gradient-change-one"></div>
 
                     {/* green circle  */}
-                    <div className="w-[120%] h-[120%] rounded-full bg-gradient-radial absolute -bottom-[30%] -right-[30%] from-[#15803d] via-transparent to-transparent blur-3xl"></div>
+                    <div className="w-[120%] h-[120%] rounded-full bg-gradient-radial absolute -bottom-[30%] -right-[30%] from-[#15803d] via-transparent to-transparent blur-3xl gradient-change-two"></div>
 
                     {/* slateblue circle */}
-                    <div className="w-[120%] h-[120%] rounded-full bg-gradient-radial absolute -bottom-[30%] -left-[30%] from-[#6d28d9] via-transparent to-transparent blur-3xl"></div>
+                    <div className="w-[120%] h-[120%] rounded-full bg-gradient-radial absolute -bottom-[30%] -left-[30%] from-[#6d28d9] via-transparent to-transparent blur-3xl gradient-change-three"></div>
 
                     {/* flash lazer */}
                     <div className=" animate-pulse absolute md:w-[323.73px] w-[150px] md:h-[635.29px] md:top-0 top-[30%] left-1/2 -translate-x-1/2 opacity-70">
@@ -48,6 +48,12 @@ const LandingPage = () => {
                         <div className="md:w-[546px] flex flex-col items-center justify-start self-center">
                             <h1 className=" font-bold md:text-[120px] text-[50px] leading-none  text-center font-Bebas text-[#F3F1FD]">rap battles onchain</h1>
                             <p className="text-[#F3F1FD] text-[18px] font-sans text-center">The ultimate decentralized platform for rap battles. Showcase your lyrical skills or enjoy the raw energy of live rap—RapMattaz brings music, web 3, and community together.</p>
+                            <button
+                                onClick={() => router.push('/signin')}
+                                type="button"
+                                className={`py-2 mt-4 border font-Bebas rounded-md text-sm md:text-base uppercase text-gray-50 bg-gradient-to-t from-[#503BE8] via-[#6957EB] to-[#715FEC] border-[#503BE8] px-6 tracking-wider transition-all duration-200 hover:-skew-x-12`}>
+                                Join Now
+                            </button>
                         </div>
 
                         {/* right content */}
@@ -74,7 +80,7 @@ const LandingPage = () => {
                         <h3 className="text-gray-300 font-Bebas text-center text-xl">MoonBabe</h3>
                         <p className="text-[#705CEF] font-Bebas text-center px-2 py-1 border border-[#FFFFFF]/[10%] rounded-md"><span className="text-gray-100">5</span> - ra points</p>
 
-                        <div className="w-full flex flex-col gap-2">
+                        <div className="w-full flex flex-col gap-3">
                             <h4 className="text-gray-300 font-Bebas text-3xl">artiste</h4>
 
                             <p className="text-gray-300 text-sm font-light"><span className="font-semibold">Create your profile:</span> Sign up with your wallet, create a username, add a profile image and mint your artiste NFT</p>
@@ -83,7 +89,7 @@ const LandingPage = () => {
 
                             <p className="text-gray-300 text-sm font-light"><span className="font-semibold">Engage & compete:</span> Join live battles, participate in voting, and earn RAPOINTS</p>
 
-                            <button className="w-full py-1.5 border border-[#705CEF] text-gray-300 font-Bebas rounded-md mt-3">Challenge</button>
+                            <button onClick={() => router.push('/signin')} className="w-full py-1.5 border border-[#705CEF] text-gray-300 font-Bebas rounded-md mt-3">Challenge</button>
                         </div>
                     </div>
 
@@ -94,7 +100,7 @@ const LandingPage = () => {
                         <h3 className="text-gray-300 font-Bebas text-center text-xl">WhiteGhost</h3>
                         <p className="text-[#705CEF] font-Bebas text-center px-2 py-1 border border-[#FFFFFF]/[10%] rounded-md"><span className="text-gray-100">5</span> - ra points</p>
 
-                        <div className="w-full flex flex-col gap-2">
+                        <div className="w-full flex flex-col gap-3">
                             <h4 className="text-gray-300 font-Bebas text-3xl">fans</h4>
 
                             <p className="text-gray-300 text-sm font-light"><span className="font-semibold">Create your profile:</span>  Sign up with your wallet, create a username, add a profile image and claim your RAVT tokens</p>
@@ -103,7 +109,7 @@ const LandingPage = () => {
 
                             <p className="text-gray-300 text-sm font-light"><span className="font-semibold">Get involved:</span>  Vote, comment, and engage with the community during live battles.</p>
 
-                            <button className="w-full py-1.5 border border-[#705CEF] text-gray-300 font-Bebas rounded-md mt-3">Follow</button>
+                            <button onClick={() => router.push('/signin')} className="w-full py-1.5 border border-[#705CEF] text-gray-300 font-Bebas rounded-md mt-3">Follow</button>
                         </div>
                     </div>
                 </div>
