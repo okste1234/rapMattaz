@@ -8,13 +8,12 @@ const font = fs.readFileSync(
     join(process.cwd(), "src/fonts/RedHatDisplayBlack.ttf")
 );
 
-const generateImageSvg = async (
-): Promise<string> => {
+const generateImageSvg = async (): Promise<string> => {
     return await satori(
         <div
             style={{
                 background: "rgba(13, 13, 15, 0.99)",
-                backgroundImage: `url(${envVars.hostUrl}/bgCover.jpeg)`,
+                backgroundImage: `url(${envVars.hostUrl}/bgCover11.jpeg)`,
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "100% 100%",
                 display: "flex",
@@ -95,9 +94,7 @@ const generateImageSvg = async (
     );
 };
 
-export const generateBase64Image = async (
-  
-) => {
+export const generateBase64Image = async () => {
     const svg = await generateImageSvg();
     return (await sharp(Buffer.from(svg)).toFormat("png").toBuffer()).toString(
         "base64"
