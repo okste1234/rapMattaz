@@ -12,6 +12,7 @@
     "@types/howler": "^2.2.11",
     "@web3modal/ethers": "^5.0.6",
     "@web3modal/wallet": "^5.0.6",
+    "axios": "^1.7.2",
     "ethers": "^6.13.1",
     "framer-motion": "^11.3.2",
     "next": "14.2.4",
@@ -21,6 +22,8 @@
     "react-dom": "^18",
     "react-icons": "^5.2.1",
     "react-slick": "^0.30.2",
+    "satori": "^0.10.14",
+    "sharp": "^0.33.4",
     "slick-carousel": "^1.8.1",
     "sonner": "^1.5.0",
     "use-sound": "^4.0.3"
