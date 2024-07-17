@@ -96,11 +96,11 @@ const generateImageSvg = async (): Promise<string> => {
 
 export const generateBase64Image = async () => {
     const svg = await generateImageSvg();
-    let png = await sharp(Buffer.from(svg)).toFormat("png").toBuffer()
-    fs.writeFile("pic.png", png, (err) => {
-    if (err) throw err;
-    console.log("The file has been saved!");
-});
+//     let png = await sharp(Buffer.from(svg)).toFormat("png").toBuffer()
+//     fs.writeFile("pic.png", png, (err) => {
+//     if (err) throw err;
+//     console.log("The file has been saved!");
+// });
     return (await sharp(Buffer.from(svg)).toFormat("png").toBuffer()).toString(
         "base64"
     );
