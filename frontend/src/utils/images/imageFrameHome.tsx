@@ -13,7 +13,7 @@ const generateImageSvg = async (): Promise<string> => {
         <div
             style={{
                 background: "rgba(13, 13, 15, 0.99)",
-                backgroundImage: `url(${envVars.hostUrl}/bgCover12.jpeg)`,
+                backgroundImage: `url(${envVars.hostUrl}/bgCover12.png)`,
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "100% 100%",
                 display: "flex",
@@ -55,7 +55,7 @@ const generateImageSvg = async (): Promise<string> => {
                     paddingTop:"20px"
                 }}
             >
-                {/* <div
+                <div
                     style={{
                         display: "flex",
                         flexDirection: "column",
@@ -66,7 +66,7 @@ const generateImageSvg = async (): Promise<string> => {
                         src={`${envVars.hostUrl}/fanNFT1.png`}
                         style={{ width: "220px", height: "220px" }}
                     />
-                </div> */}
+                </div>
             </div>
             <div
                 style={{
@@ -96,6 +96,11 @@ const generateImageSvg = async (): Promise<string> => {
 
 export const generateBase64Image = async () => {
     const svg = await generateImageSvg();
+    let png = await sharp(Buffer.from(svg)).toFormat("png").toBuffer()
+    fs.writeFile("pic.png", png, (err) => {
+    if (err) throw err;
+    console.log("The file has been saved!");
+});
     return (await sharp(Buffer.from(svg)).toFormat("png").toBuffer()).toString(
         "base64"
     );

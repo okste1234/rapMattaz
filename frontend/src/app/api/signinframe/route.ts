@@ -20,7 +20,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
               <meta property="fc:frame" content="vNext" />
               <meta
                 property="fc:frame:image"
-                content="data:image/png;base64,${base64PriceImage}"
+                content=${envVars.hostUrl}/pic.png
               />
               <meta
                 property="fc:frame:post_url"
