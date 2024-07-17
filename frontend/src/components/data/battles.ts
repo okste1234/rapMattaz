@@ -6,7 +6,7 @@ export const Battles = [
     challengerImg: unicorn,
     challenged: "wizkid",
     challengedImg: dinosaur,
-    battleLink: "live.rapmattaz.com/zxcvvbnm",
+    battleLink: "/livebattle",
     date: "20th aug, 2024",
     time: "4pm",
     challengerPoints: {},
@@ -16,7 +16,7 @@ export const Battles = [
     challengerImg: horror,
     challenged: "Vector",
     challengedImg: monkey,
-    battleLink: "live.rapmattaz.com/zxcvvbnm",
+    battleLink: "/livebattle",
     date: "25th aug, 2024",
     time: "6pm",
   },
@@ -40,6 +40,29 @@ export const Artiste = [
   },
   {
     name: "Burna",
+    img: monkey,
+    points: 7,
+  },
+];
+
+export const FansList = [
+  {
+    name: "Ekarika",
+    img: unicorn,
+    points: 5,
+  },
+  {
+    name: "Signor",
+    img: dinosaur,
+    points: 10,
+  },
+  {
+    name: "Felix",
+    img: horror,
+    points: 3,
+  },
+  {
+    name: "Stephen",
     img: monkey,
     points: 7,
   },

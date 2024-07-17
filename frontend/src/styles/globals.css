@@ -73,16 +73,56 @@
   animation-delay: 0s;
 }
 
-.animate-spin-slow {
-  animation: spin 20s linear infinite;
+.gradient-change-one {
+  animation: gradient-change-one 20s linear infinite;
 }
 
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
+@keyframes gradient-change-one {
+  35% {
+    background-image: radial-gradient(circle, #a21caf, transparent, transparent);
   }
 
-  to {
-    transform: rotate(360deg);
+  70% {
+    background-image: radial-gradient(circle, #15803d, transparent, transparent);
+  }
+
+  100% {
+    background-image: radial-gradient(circle, #6d28d9, transparent, transparent);
+  }
+}
+
+.gradient-change-two {
+  animation: gradient-change-two 20s linear infinite;
+}
+
+@keyframes gradient-change-two {
+  35% {
+    background-image: radial-gradient(circle, #15803d, transparent, transparent);
+  }
+
+  70% {
+    background-image: radial-gradient(circle, #a21caf, transparent, transparent);
+  }
+
+  100% {
+    background-image: radial-gradient(circle, #6d28d9, transparent, transparent);
+  }
+}
+
+.gradient-change-three {
+  animation: gradient-change-three 20s linear infinite;
+}
+
+@keyframes gradient-change-three {
+  35% {
+    background-image: radial-gradient(circle, #6d28d9, transparent, transparent);
+  }
+
+  70% {
+    background-image: radial-gradient(circle, #a21caf, transparent, transparent);
+  }
+
+  100% {
+    background-image: radial-gradient(circle, #15803d, transparent, transparent);
   }
 }
