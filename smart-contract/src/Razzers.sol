@@ -30,13 +30,14 @@ contract Razzers is ERC1155, Ownable {
     uint256 public constant FAN_TOKEN_ID = 1;
     uint256 public constant RAPPER_TOKEN_ID = 2;
 
+    string public fanURI = "https://aquamarine-famous-penguin-727.mypinata.cloud/ipfs/QmPPBwVrNZDnZR1YeWYbdyBYSfVuAXAQynTSoLrxBCvg4G";
+    string public rapperURI = "https://aquamarine-famous-penguin-727.mypinata.cloud/ipfs/QmcjEFFg8rPgCumRyaFeNr3veLsdkbo128Ncmc6ZjjFSiU";
+    string public rapper2URI = "https://aquamarine-famous-penguin-727.mypinata.cloud/ipfs/QmTcfkyGmqykJbpNy5P1chijixZy5VsUWabGGYeoJQ87zo";
+
     mapping(string => bool) private usedUsernames;
     mapping(uint256 => uint256) public ravelToTokenId;
     mapping(uint256 => string) private _tokenURIs;
     uint256 public nextTokenId = 3;
-
-    string public rapperURI;
-    string public fanURI;
 
     event UserRegistered(address indexed user, string username, UserType userType);
     event UserUpgraded(address indexed user, UserType newType);
@@ -47,6 +48,9 @@ contract Razzers is ERC1155, Ownable {
         ravtContract = RAVT(_ravtAddress);
         rakenContract = Raken(_rakenAddress);
         attributesContract = RazzersAttributes(_attributesAddress);
+
+        setURIs(rapperURI, fanURI);
+        setRavelNFT(3, rapper2URI);
     }
 
     function setURIs(string memory _rapperURI, string memory _fanURI) public onlyOwner {
