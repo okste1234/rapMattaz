@@ -1,4 +1,3 @@
-
 import satori from "satori";
 import { join } from "path";
 import * as fs from "fs";
@@ -9,7 +8,7 @@ const font = fs.readFileSync(
     join(process.cwd(), "src/fonts/RedHatDisplayBlack.ttf")
 );
 
-const generateFrameImageSvg = async (
+const generateImageSvg = async (
 ): Promise<string> => {
     return await satori(
         <div
@@ -43,7 +42,7 @@ const generateFrameImageSvg = async (
                             "0 0 5px #13547a, 0 0 10px #13547a, 0 0 5px #13547a, 0 0 5px #13547a",
                     }}
                 >
-                    Rap Mattaz
+                   Rap Mattaz
                 </span>
             </div>
             <div
@@ -54,12 +53,21 @@ const generateFrameImageSvg = async (
                     justifyContent: "center",
                     width: "100%",
                     paddingBottom: "40px",
+                    paddingTop:"20px"
                 }}
             >
-                <img
-                    src={`${envVars.hostUrl}/fanNFT.png`}
-                    style={{ width: "220px", height: "210px" }}
-                />
+                <div
+                    style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                    }}
+                >
+                    <img
+                        src={`${envVars.hostUrl}/fanNFT1.png`}
+                        style={{ width: "220px", height: "220px" }}
+                    />
+                </div>
             </div>
             <div
                 style={{
@@ -87,10 +95,10 @@ const generateFrameImageSvg = async (
     );
 };
 
-export const generateHomeImage = async (
-
+export const generateBase64Image = async (
+  
 ) => {
-    const svg = await generateFrameImageSvg();
+    const svg = await generateImageSvg();
     return (await sharp(Buffer.from(svg)).toFormat("png").toBuffer()).toString(
         "base64"
     );

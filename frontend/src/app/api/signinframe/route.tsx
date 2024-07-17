@@ -1,12 +1,12 @@
 
 import { envVars } from "@/utils/env";
-import { generateHomeImage } from "@/utils/images/imageFrameHome";
+import { generateBase64Image } from "@/utils/images/imageFrameHome";
 import { NextRequest, NextResponse } from "next/server";
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
     try {
 
-        const base64Image = await generateHomeImage();  
+        const base64Image = await generateBase64Image();  
 
         return new NextResponse(`
           <!DOCTYPE html>
