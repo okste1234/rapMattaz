@@ -52,10 +52,8 @@ const generateFrameImageSvg = async (
                     flexDirection: "row",
                     alignItems: "center",
                     justifyContent: "center",
-                    gap: "4rem",
                     width: "100%",
                     paddingBottom: "40px",
-                    animation: "tilt 3s ease-in-out infinite"
                 }}
             >
                 <img
