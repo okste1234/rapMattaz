@@ -11,8 +11,8 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
           <!DOCTYPE html>
           <html>
             <head>
-              <title>Price Feed Farcaster Frame</title>
-              <meta property="og:title" content="Price Feed Farcaster Frame" />
+              <title>Rap Mattaz Farcaster Frame</title>
+              <meta property="og:title" content="Rap Mattaz Farcaster Frame" />
               <meta
                 property="og:image"
                 content=${envVars.hostUrl}/RapMattaz.png
@@ -29,7 +29,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
               <meta property="fc:frame:button:1" content="Refresh" />
             </head>
             <body>
-              <p>"Price Feed Farcaster Frame</p>
+              <p>"Rap Mattaz Feed Farcaster Frame</p>
             </body>
           </html>
     `);
@@ -38,8 +38,8 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
           <!DOCTYPE html>
           <html>
             <head>
-              <title>Price Feed Farcaster Frame</title>
-              <meta property="og:title" content="Price Feed Farcaster Frame" />
+              <title>Rap Mattaz Farcaster Frame</title>
+              <meta property="og:title" content="Rap Mattaz Farcaster Frame" />
               <meta
                 property="og:image"
                 content=${envVars.hostUrl}/error.png
@@ -56,7 +56,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
               <meta property="fc:frame:button:1" content="Reset" />
             </head>
             <body>
-              <p>"Price Feed Farcaster Frame</p>
+              <p>"Rap Mattaz Farcaster Frame</p>
             </body>
           </html>
         `);
