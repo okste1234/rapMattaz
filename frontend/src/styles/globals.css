@@ -1,128 +1,104 @@
-@import url('https://fonts.googleapis.com/css2?family=Reenie+Beanie&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Allura&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Reenie+Beanie&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Allura&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+	.text-balance {
+		text-wrap: balance;
+	}
 }
 
 *::-webkit-scrollbar {
-  display: none;
+	display: none;
 }
 
 .anime-beats {
-  height: 26px;
-  display: flex;
-  align-items: center;
+	height: 26px;
+	display: flex;
+	align-items: center;
 }
 
 .anime-beats .stroke {
-  display: block;
-  position: relative;
-  background-image: linear-gradient(to top, #c026d3, #7c3aed, #3b82f6, #06b6d4);
-  height: 100%;
-  width: 2px;
-  border-radius: 50px;
-  margin: 0 2px;
-  animation: beat 1.2s infinite linear;
+	display: block;
+	position: relative;
+	background-image: linear-gradient(to top, #c026d3, #7c3aed, #3b82f6, #06b6d4);
+	height: 100%;
+	width: 2px;
+	border-radius: 50px;
+	margin: 0 2px;
+	animation: beat 1.2s infinite linear;
 }
 
 @keyframes beat {
-  50% {
-    height: 20%;
-  }
+	50% {
+		height: 20%;
+	}
 
-  100% {
-    height: 100%;
-  }
+	100% {
+		height: 100%;
+	}
+}
+
+@keyframes tilt {
+	0% {
+		transform: rotate(0deg);
+	}
+	25% {
+		transform: rotate(-10deg);
+	}
+	50% {
+		transform: rotate(0deg);
+	}
+	75% {
+		transform: rotate(10deg);
+	}
+	100% {
+		transform: rotate(0deg);
+	}
 }
 
 .stroke:nth-child(1) {
-  animation-delay: 0s;
+	animation-delay: 0s;
 }
 
 .stroke:nth-child(2) {
-  animation-delay: 0.3s;
+	animation-delay: 0.3s;
 }
 
 .stroke:nth-child(3) {
-  animation-delay: 0.6s;
+	animation-delay: 0.6s;
 }
 
 .stroke:nth-child(4) {
-  animation-delay: 0.9s;
+	animation-delay: 0.9s;
 }
 
 .stroke:nth-child(5) {
-  animation-delay: 0.6s;
+	animation-delay: 0.6s;
 }
 
 .stroke:nth-child(6) {
-  animation-delay: 0.3s;
+	animation-delay: 0.3s;
 }
 
 .stroke:nth-child(7) {
-  animation-delay: 0s;
+	animation-delay: 0s;
 }
 
-.gradient-change-one {
-  animation: gradient-change-one 20s linear infinite;
+.animate-spin-slow {
+	animation: spin 20s linear infinite;
 }
 
-@keyframes gradient-change-one {
-  35% {
-    background-image: radial-gradient(circle, #a21caf, transparent, transparent);
-  }
+@keyframes spin {
+	from {
+		transform: rotate(0deg);
+	}
 
-  70% {
-    background-image: radial-gradient(circle, #15803d, transparent, transparent);
-  }
-
-  100% {
-    background-image: radial-gradient(circle, #6d28d9, transparent, transparent);
-  }
-}
-
-.gradient-change-two {
-  animation: gradient-change-two 20s linear infinite;
-}
-
-@keyframes gradient-change-two {
-  35% {
-    background-image: radial-gradient(circle, #15803d, transparent, transparent);
-  }
-
-  70% {
-    background-image: radial-gradient(circle, #a21caf, transparent, transparent);
-  }
-
-  100% {
-    background-image: radial-gradient(circle, #6d28d9, transparent, transparent);
-  }
-}
-
-.gradient-change-three {
-  animation: gradient-change-three 20s linear infinite;
-}
-
-@keyframes gradient-change-three {
-  35% {
-    background-image: radial-gradient(circle, #6d28d9, transparent, transparent);
-  }
-
-  70% {
-    background-image: radial-gradient(circle, #a21caf, transparent, transparent);
-  }
-
-  100% {
-    background-image: radial-gradient(circle, #15803d, transparent, transparent);
-  }
+	to {
+		transform: rotate(360deg);
+	}
 }
