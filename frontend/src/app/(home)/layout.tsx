@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     other: {
         "fc:frame": "vNext",
         "fc:frame:image": `${envVars.hostUrl}/RapMattaz.png`,
-        "fc:frame:button:1:post_url": `${envVars.hostUrl}/api/signinframe`,
+        "fc:frame:button:1:post_url": `${envVars.hostUrl}/api/live`,
         "fc:frame:button:1": "Battle Update",
         "fc:frame:button:2": `Join Live`, 
         "fc:frame:button:2:action": "link",

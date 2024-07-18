@@ -23,10 +23,14 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
                 content="data:image/png;base64,${base64PriceImage}"
               />
               <meta
-                property="fc:frame:post_url"
-                content=${envVars.hostUrl}/api/signinframe
+                property="fc:frame:button:1:post_url"
+                content=${envVars.hostUrl}/api/live
               />
               <meta property="fc:frame:button:1" content="Refresh" />
+
+              <meta name="fc:frame:button:2" content="Join Live" />
+              <meta name="fc:frame:button:2:action" content="link" />
+              <meta name="fc:frame:button:2:target" content=${envVars.hostUrl}/battles />
             </head>
             <body>
               <p>"Rap Mattaz Feed Farcaster Frame</p>
