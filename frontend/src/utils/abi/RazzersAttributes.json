@@ -1,0 +1,437 @@
+[
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "_rakenAddress",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "owner",
+                "type": "address"
+            }
+        ],
+        "name": "OwnableInvalidOwner",
+        "type": "error"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "account",
+                "type": "address"
+            }
+        ],
+        "name": "OwnableUnauthorizedAccount",
+        "type": "error"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "previousOwner",
+                "type": "address"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "newOwner",
+                "type": "address"
+            }
+        ],
+        "name": "OwnershipTransferred",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "rapper",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "RapointConverted",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "rapper",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "RapointDeducted",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "rapper",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "flow",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "lyrics",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "charisma",
+                "type": "uint256"
+            }
+        ],
+        "name": "RapperAttributesUpdated",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "rapper",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "newRavel",
+                "type": "uint256"
+            }
+        ],
+        "name": "RavelUpdated",
+        "type": "event"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "challenger",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "opponent",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "challengerVotes",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "opponentVotes",
+                "type": "uint256"
+            }
+        ],
+        "name": "battleDrawn",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "rapper",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "convertRapointToRaken",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "rapper",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "deductRapoints",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "_rapper",
+                "type": "address"
+            }
+        ],
+        "name": "getRapperInfo",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "ravel",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "flow",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "lyrics",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "charisma",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "battleWins",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "fanBase",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "votes",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "rapoint",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "unconvertedRapoint",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "rapper",
+                "type": "address"
+            }
+        ],
+        "name": "increaseFanBase",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "rapper",
+                "type": "address"
+            }
+        ],
+        "name": "initializeRapperAttributes",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "owner",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "rakenContract",
+        "outputs": [
+            {
+                "internalType": "contract Raken",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "name": "rapperAttributes",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "ravel",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "flow",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "lyrics",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "charisma",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "battleWins",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "fanBase",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "votes",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "rapoint",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "unconvertedRapoint",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "renounceOwnership",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "newOwner",
+                "type": "address"
+            }
+        ],
+        "name": "transferOwnership",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "winner",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "loser",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "winnerVotes",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "loserVotes",
+                "type": "uint256"
+            }
+        ],
+        "name": "updateBattleOutcome",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "rapper",
+                "type": "address"
+            }
+        ],
+        "name": "updateRapperAttributes",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    }
+]

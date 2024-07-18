@@ -1,0 +1,379 @@
+[
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "_ravtAddress",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "_attributesAddress",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "_razzerAddress",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+    },
+    {
+        "inputs": [],
+        "name": "ReentrancyGuardReentrantCall",
+        "type": "error"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "uint256",
+                "name": "battleId",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "battleStartTime",
+                "type": "uint256"
+            }
+        ],
+        "name": "BattleAccepted",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "uint256",
+                "name": "battleId",
+                "type": "uint256"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "challenger",
+                "type": "address"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "opponent",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "acceptDeadline",
+                "type": "uint256"
+            }
+        ],
+        "name": "BattleCreated",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "uint256",
+                "name": "battleId",
+                "type": "uint256"
+            }
+        ],
+        "name": "BattleDeclined",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "uint256",
+                "name": "battleId",
+                "type": "uint256"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "winner",
+                "type": "address"
+            }
+        ],
+        "name": "BattleEnded",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "rapper",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "penaltyAmount",
+                "type": "uint256"
+            }
+        ],
+        "name": "RapointsPenalty",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "uint256",
+                "name": "battleId",
+                "type": "uint256"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "voter",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "votedFor",
+                "type": "address"
+            }
+        ],
+        "name": "VoteCast",
+        "type": "event"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "_battleId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "_battleStartTime",
+                "type": "uint256"
+            },
+            {
+                "internalType": "string",
+                "name": "_link",
+                "type": "string"
+            }
+        ],
+        "name": "acceptBattle",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "attributesContract",
+        "outputs": [
+            {
+                "internalType": "contract RazzersAttributes",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "battleCounter",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "name": "consecutiveDeclines",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "_opponent",
+                "type": "address"
+            }
+        ],
+        "name": "createBattle",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "_battleId",
+                "type": "uint256"
+            }
+        ],
+        "name": "declineBattle",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "_battleId",
+                "type": "uint256"
+            }
+        ],
+        "name": "endBattle",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "_battleId",
+                "type": "uint256"
+            }
+        ],
+        "name": "getBattleDetails",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "challenger",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "opponent",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "challengeTime",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "acceptDeadline",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "startTime",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "endTime",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "voteEndTime",
+                "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "winner",
+                "type": "address"
+            },
+            {
+                "internalType": "enum BattleZone.BattleStatus",
+                "name": "status",
+                "type": "uint8"
+            },
+            {
+                "internalType": "string",
+                "name": "streamingLink",
+                "type": "string"
+            },
+            {
+                "internalType": "uint256",
+                "name": "challengerVotes",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "opponentVotes",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "ravtContract",
+        "outputs": [
+            {
+                "internalType": "contract RAVT",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "razzerContract",
+        "outputs": [
+            {
+                "internalType": "contract Razzers",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "_battleId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "_votedFor",
+                "type": "address"
+            }
+        ],
+        "name": "vote",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    }
+]

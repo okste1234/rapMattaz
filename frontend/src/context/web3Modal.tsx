@@ -1,5 +1,6 @@
 'use client'
 import { createWeb3Modal, defaultConfig } from '@web3modal/ethers/react'
+import { Toaster } from 'sonner';
 
 export const SUPPORTED_CHAIN_ID = 84532;
 
@@ -45,5 +46,12 @@ createWeb3Modal({
 export function Web3Modal({ children }: {
     children: React.ReactNode;
 }) {
-    return children
+    return (
+        <>
+            <Toaster />
+            <div>
+                {children}
+            </div>
+        </>
+    )
 }
