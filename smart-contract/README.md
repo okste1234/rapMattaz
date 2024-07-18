@@ -190,8 +190,13 @@ $    }
 ```
 
 ## Deployment to Base
-- RAVT Contract deployed to:  0xCBE1AdC7AF9AB4856923E09d67E09aBf6a59C87D ([https://sepolia.basescan.org/address/0xcbe1adc7af9ab4856923e09d67e09abf6a59c87d])
-- Raken Contract deployed to:  0xCF691D8cBBBd34Be07456E2655f3E58f8a6c999A ([https://sepolia.basescan.org/address/0xcf691d8cbbbd34be07456e2655f3e58f8a6c999a])
-- RazzersAttributes Contract deployed to:  0x133C9c4feEE1f76861083de3C6620593d528A365 ([https://sepolia.basescan.org/address/0x133c9c4feee1f76861083de3c6620593d528a365])
-- Razzers Contract deployed to:  0xa3406F5Cf3A4128a2e0beAe6c88728E2AE5a46a1 ([https://sepolia.basescan.org/address/0xa3406f5cf3a4128a2e0beae6c88728e2ae5a46a1])
-- BattleZone Contract deployed to:  0xC915C87b4fDa3CA05d5Fa7e728f5Dfc657dE214e ([https://sepolia.basescan.org/address/0xc915c87b4fda3ca05d5fa7e728f5dfc657de214e])
+- RAVT Contract deployed to:  0x73c1b65ae1b3900b7aef94d49f37b1eb6d20f43f ([https://sepolia.basescan.org/address/0x73c1b65ae1b3900b7aef94d49f37b1eb6d20f43f])
+- Raken Contract deployed to:  0x8b78ea0d99390be0c17dcecb9f9d488e140926d6 ([https://sepolia.basescan.org/address/0x8b78ea0d99390be0c17dcecb9f9d488e140926d6])
+- RazzersAttributes Contract deployed to:  0xe1d3d133b77cbadf29d78d8876e04404c315b181 ([https://sepolia.basescan.org/address/0xe1d3d133b77cbadf29d78d8876e04404c315b181])
+- Razzers Contract deployed to:  0x1e93021e7e9ddcfa616245898da2ba453a8b5a54 ([https://sepolia.basescan.org/address/0x1e93021e7e9ddcfa616245898da2ba453a8b5a54])
+- BattleZone Contract deployed to:  0x8fd923aed024500602d504da1f259a53ae10eaae ([https://sepolia.basescan.org/address/0x8fd923aed024500602d504da1f259a53ae10eaae])
+- Multicall2 Contract deployed to:  0x85cf480231acc94aace36a46e63ca4fc5c9ef5c4 ([https://sepolia.basescan.org/address/0x85cf480231acc94aace36a46e63ca4fc5c9ef5c4])
+
+Transactions saved to: rapMattaz/smart-contract/broadcast/Deploy.s.sol/84532/run-latest.json
+Contract successfully verified
+All (6) contracts were verified!

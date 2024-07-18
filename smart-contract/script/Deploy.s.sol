@@ -7,6 +7,7 @@ import "../src/Raken.sol";
 import "../src/RazzersAttributes.sol";
 import "../src/Razzers.sol";
 import "../src/BattleZone.sol";
+import "../src/Multicall2.sol";
 
 contract DeployScript is Script {
     function run() external {
@@ -27,6 +28,9 @@ contract DeployScript is Script {
 
         BattleZone battleZone = new BattleZone(address(ravt),  address(razzersAttributes), address(razzers));
         console.log("BattleZone Contract deployed to: ", address(battleZone));
+
+        Multicall2 multicall2 = new Multicall2();
+        console.log("Multicall2 Contract deployed to: ", address(multicall2));
 
         vm.stopBroadcast();
     }

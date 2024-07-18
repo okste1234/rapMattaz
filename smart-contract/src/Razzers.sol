@@ -26,6 +26,9 @@ contract Razzers is ERC1155, Ownable {
         bool hasClaimedRAVT;
     }
 
+    uint256 public nextUserId = 1;
+    mapping(uint256 => User) public userById;
+    mapping(address => uint256) public userIdByAddress;
     mapping(address => User) public users;
     uint256 public constant FAN_TOKEN_ID = 1;
     uint256 public constant RAPPER_TOKEN_ID = 2;
@@ -80,8 +83,10 @@ contract Razzers is ERC1155, Ownable {
     function registerUser(string memory _username, string memory _imageURL, UserType _userType) public {
         require(users[msg.sender].wallet == address(0), "User already registered");
         require(!usedUsernames[_username], "Username already taken");
-        
-        users[msg.sender] = User({
+    
+        uint256 userId = nextUserId;
+    
+        User memory newUser = User({
             wallet: msg.sender,
             username: _username,
             imageURL: _imageURL,
@@ -90,7 +95,12 @@ contract Razzers is ERC1155, Ownable {
             hasClaimedRAVT: false
         });
 
+        users[msg.sender] = newUser;
+        userById[userId] = newUser;
+        userIdByAddress[msg.sender] = userId;
+
         usedUsernames[_username] = true;
+        nextUserId++;
 
         if (_userType == UserType.Rapper) {
             _mint(msg.sender, RAPPER_TOKEN_ID, 1, "");
@@ -114,10 +124,15 @@ contract Razzers is ERC1155, Ownable {
 
     function upgradeToRapper() public {
         require(users[msg.sender].userType == UserType.Fan, "User must be a fan to upgrade");
+    
         users[msg.sender].userType = UserType.Rapper;
+        uint256 userId = userIdByAddress[msg.sender];
+        userById[userId].userType = UserType.Rapper;
+    
         _mint(msg.sender, RAPPER_TOKEN_ID, 1, "");
         _burn(msg.sender, FAN_TOKEN_ID, 1);
         attributesContract.initializeRapperAttributes(msg.sender);
+    
         emit UserUpgraded(msg.sender, UserType.Rapper);
     }
 
@@ -146,6 +161,16 @@ contract Razzers is ERC1155, Ownable {
 
     function isRapper(address _user) public view returns (bool) {
         return users[_user].userType == UserType.Rapper;
+    }
+
+    function getUserById(uint256 _userId) public view returns (User memory) {
+        require(_userId > 0 && _userId < nextUserId, "Invalid user ID");
+        return userById[_userId];
+    }
+
+    function getUserIdByAddress(address _userAddress) public view returns (uint256) {
+        require(userIdByAddress[_userAddress] != 0, "User not found");
+        return userIdByAddress[_userAddress];
     }
 
     function getFanDetails(address _fan) external view returns(string memory username, string memory imageURL, UserType userType, address[] memory following) {
