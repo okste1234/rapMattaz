@@ -19,7 +19,9 @@ export const metadata: Metadata = {
         "fc:frame:button:1": "Battle Update",
         "fc:frame:button:2": `Join Live`, 
         "fc:frame:button:2:action": "link",
-        "fc:frame:button:2:target": `${envVars.hostUrl}/battles`,        
+        "fc:frame:button:2:target": `${envVars.hostUrl}/battles`,
+        "fc:frame:button:3:post_url": `${envVars.hostUrl}/api/select`,
+        "fc:frame:button:3": "Chat Bot",
     },
 };
 
