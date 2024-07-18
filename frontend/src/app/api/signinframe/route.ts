@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 async function getResponse(req: NextRequest): Promise<NextResponse> {
     try {
 
-        const base64PriceImage = await generateBase64Image();
+        const base64PriceImage = await generateBase64Image("josh", "voicezz");
 
         return new NextResponse(`
           <!DOCTYPE html>
@@ -20,7 +20,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
               <meta property="fc:frame" content="vNext" />
               <meta
                 property="fc:frame:image"
-                content=${envVars.hostUrl}/pic.png
+                content="data:image/png;base64,${base64PriceImage}"
               />
               <meta
                 property="fc:frame:post_url"
