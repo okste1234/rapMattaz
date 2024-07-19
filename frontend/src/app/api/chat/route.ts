@@ -17,16 +17,21 @@ export async function POST(req: NextRequest) {
           <head>
             <title>Let Rap it up</title>
             <meta property="og:title" content="Rap Mattaz" />
-            <meta property="og:image" content="${imgeUrl}" />
+            <meta property="og:image" content=${imgeUrl} />
             <meta property="fc:frame" content="vNext" />
-            <meta property="fc:frame:image" content="${imgeUrl}" />
+              <meta
+                property="fc:frame:image"
+                content=${imgeUrl}
+              />
+              <meta
+                property="fc:frame:button:1:post_url"
+                content=${envVars.hostUrl}
+              />
+              <meta property="fc:frame:button:1" content="Refresh" />
 
-            <meta property="fc:frame:button:1" content="RapMAttaz" />
-            <meta property="fc:frame:button:1:post_url" content="${postUrl}" />
-            <meta name="fc:frame:button:1:action" content="post_redirect" />
-            <meta property="fc:frame:button:2" content="Refresh" />
-            <meta property="fc:frame:button:2:post_url" content="${envVars.hostUrl}" />
-            <meta name="fc:frame:button:2:action" content="post_redirect" />
+              <meta name="fc:frame:button:2" content="RapMattaz" />
+              <meta name="fc:frame:button:2:action" content="link" />
+              <meta name="fc:frame:button:2:target" content=${envVars.hostUrl} />
           </head>
           <body/>
         </html>`,
