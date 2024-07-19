@@ -5,7 +5,6 @@ import Abi1 from '@/utils/abi/Razzers.json';
 import Abi2 from '@/utils/abi/BattleZone.json';
 import Abi3 from '@/utils/abi/RazzersAttributes.json';
 import { ethers } from 'ethers';
-import { useLatestBlock } from './useLatestBlock';
 import { readOnlyProvider } from '@/utils/provider';
 import { getBattleZoneContract, getMulticallContract, getRazzersContract } from '@/utils/contract';
 import { envVars } from '@/utils/env';
@@ -17,7 +16,7 @@ const useGetAllUsersAndBattles = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | null>(null);
 
-  const newBlock = useLatestBlock();
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -153,7 +152,7 @@ const useGetAllUsersAndBattles = () => {
     };
 
     fetchData();
-  }, [newBlock]);
+  }, []);
 
   return { userInfo, battleInfo,rapperInfo, loading, error };
 };
