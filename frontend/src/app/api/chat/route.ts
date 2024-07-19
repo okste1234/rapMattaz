@@ -22,8 +22,11 @@ export async function POST(req: NextRequest) {
             <meta property="fc:frame:image" content="${imgeUrl}" />
 
             <meta property="fc:frame:button:1" content="RapMAttaz" />
-            <meta property="fc:frame:post_url" content="${postUrl}" />
+            <meta property="fc:frame:button:1:post_url" content="${postUrl}" />
             <meta name="fc:frame:button:1:action" content="post_redirect" />
+            <meta property="fc:frame:button:2" content="Refresh" />
+            <meta property="fc:frame:button:2:post_url" content="${envVars.hostUrl}" />
+            <meta name="fc:frame:button:2:action" content="post_redirect" />
           </head>
           <body/>
         </html>`,
