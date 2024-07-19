@@ -16,7 +16,7 @@ export async function GET(req: NextRequest) {
             }}
         >
             <img
-                src={`${envVars.hostUrl}/pic.png`}
+                src={`${envVars.hostUrl}/logo.png`}
                 style={{
                     position: "absolute",
                     width: "100%",
