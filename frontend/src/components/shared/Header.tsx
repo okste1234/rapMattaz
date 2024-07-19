@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { FaBell, FaCrown } from "react-icons/fa6";
 import { useSwitchNetwork, useWalletInfo, useWeb3Modal, useWeb3ModalAccount } from "@web3modal/ethers/react";
 import { WalletConnected } from "./WalletConnected";
-import profileImg from "../../../public/profileImg.jpeg"
 import { AnimatePresence, motion } from "framer-motion";
 import { modalVariants } from "./Animations";
 import { IoCloseOutline } from "react-icons/io5";
@@ -14,9 +13,16 @@ import Image from "next/image";
 import { FiEdit } from "react-icons/fi";
 import singlecoin from "../../../public/singlecoin.png"
 import rapperNFT from "../../../public/rapperNFT.png"
+import fanNFT from "../../../public/fanNFT.png"
 import { IoIosNotificationsOutline } from "react-icons/io";
+import useGetAllUsersAndBattles from "@/hooks/useGetAllUsersAndBattles";
+import useGetStatus from "@/hooks/useGetStatus";
+import useBalanceOf from "@/hooks/useBalanceOf";
 
 const Header = () => {
+    const { userInfo, battleInfo, rapperInfo, loading, } = useGetAllUsersAndBattles()
+    const thisUser = useGetStatus()
+    const ravtBal = useBalanceOf()
 
 
     const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -61,6 +67,15 @@ const Header = () => {
         };
     })
 
+    const artist = userInfo.filter(user => user.userType === 1);
+
+    const combinedArtist = artist.map((user, index) => {
+        const rapper = rapperInfo[index] || {}; 
+        return { ...user, ...rapper };
+    });
+
+    const UsersArtist = combinedArtist.filter(user => user.wallet === address);
+
     return (
         <header className="w-full z-50 flex justify-between items-center px-4 border border-[#FFFFFF]/[15%] bg-[#28233c] h-[56px] rounded-md">
             <Link href={`/`} className="flex gap-1 items-center">
@@ -80,7 +95,7 @@ const Header = () => {
                     type="button"
                     className={`py-1 border font-Bebas rounded-md text-sm md:text-base uppercase text-gray-50 ${isConnected ? "px-4 border-[#FFFFFF]/[15%]" : "bg-gradient-to-t from-[#503BE8] via-[#6957EB] to-[#715FEC] border-[#503BE8] px-6"}`}>
                     {
-                        isConnected ? <WalletConnected username={`MI Abaga`} icon={profileImg} />
+                        isConnected ? <WalletConnected username={thisUser?.username} icon={thisUser?.imageURL} />
                             : <span>Connect Wallet</span>
                     }
                 </button>
@@ -135,7 +150,7 @@ const Header = () => {
                                                 quality={100}
                                             />
                                         ) : (
-                                            <Image src={profileImg} alt="Profile Image" className="w-full h-full rounded-full" width={220} height={220} quality={100} priority />
+                                            <img src={thisUser?.imageURL} alt="Profile Image" className="w-full h-full rounded-full" width={220} height={220} />
                                         )}
                                         <input
                                             type="file"
@@ -153,11 +168,13 @@ const Header = () => {
                                     </div>
                                     <div className="flex flex-col gap-1">
                                         <h1 className="text-gray-100 md:text-xl text-lg font-Bebas font-light">
-                                            MI Abaga
+                                            {thisUser?.username}
                                         </h1>
                                         <div className="flex gap-4 -mt-1">
-                                            <p className="text-[#D6D1FA] font-light text-sm"><span className="font-semibold text-white">15k</span> followers</p>
-                                            <p className="text-[#D6D1FA] font-light text-sm"><span className="font-semibold text-white">100</span> following</p>
+                                           {thisUser?.userType == 1 &&  <p className="text-[#D6D1FA] font-light text-sm">
+                                                <span className="font-semibold text-white">15k</span> followers</p>
+                                                }
+                                            <p className="text-[#D6D1FA] font-light text-sm"><span className="font-semibold text-white">0</span> following</p>
                                         </div>
                                         <button type="button"
                                             className=" flex items-center justify-center cursor-pointer w-[95px] h-[32px] border-[0.5px] border-[#7464ED] font-Bebas tracking-wider text-gray-100 text-sm rounded-md">
@@ -176,7 +193,7 @@ const Header = () => {
                                         <div className="w-[32px] h-[32px]">
                                             <Image src={singlecoin} alt='image' width={132} height={128} quality={100} priority className='w-full h-full' />
                                         </div>
-                                        <p className='text-[#F3F1FD] text-xl font-Bebas'>100{" "}<span className='text-[#897AF0]'>rkvt</span></p>
+                                        <p className='text-[#F3F1FD] text-xl font-Bebas'>{ravtBal}{" "}<span className='text-[#897AF0]'>rkvt</span></p>
                                     </div>
                                     <button type="button" className="bg-gradient-to-t from-[#503BE8] via-[#6957EB] to-[#715FEC] border-[#503BE8] px-6 py-1.5 font-Bebas text-gray-100 rounded-md tracking-wide">Purchase token</button>
                                 </div>
@@ -184,41 +201,53 @@ const Header = () => {
 
 
                             {/* Rapper NFT */}
-
-                            <div className="w-full md:px-6 px-4 py-8">
-                                <div className="w-full p-[40px] flex flex-col gap-2 rounded-lg bg-[#FFFFFF]/[5%] border border-[#FFFFFF]/[10%]">
-                                    <div className="w-full h-[343px]">
-                                        <Image src={rapperNFT} alt='image' width={1184} height={1396} quality={100} priority className='w-full h-full' />
+                            {thisUser?.userType == 1 &&
+                                <div className="w-full md:px-6 px-4 py-8">
+                                    <div className="w-full p-[40px] flex flex-col gap-2 rounded-lg bg-[#FFFFFF]/[5%] border border-[#FFFFFF]/[10%]">
+                                        <div className="w-full h-[343px]">
+                                            <Image src={rapperNFT} alt='image' width={1184} height={1396} quality={100} priority className='w-full h-full' />
+                                        </div>
+                                        <h1 className="text-gray-100 font-Bebas md:text-2xl text-xl text-center">{UsersArtist[0]?.username }</h1>
+                                        <ul className="w-full flex flex-col gap-2 px-3 list-none">
+                                            <li className="w-full flex justify-between items-center text-gray-100 font-Bebas text-xl">
+                                                <span className="text-[#897AF0]">Rap points</span>
+                                                <span>{UsersArtist[0]?.rapoint}</span>
+                                            </li>
+                                            <li className="w-full flex justify-between items-center text-gray-100 font-Bebas text-xl">
+                                                <span className="text-[#897AF0]">Battle wins</span>
+                                                <span>{UsersArtist[0]?.battleWins}</span>
+                                            </li>
+                                            <li className="w-full flex justify-between items-center text-gray-100 font-Bebas text-xl">
+                                                <span className="text-[#897AF0]">fan base</span>
+                                                <span>{UsersArtist[0]?.fanBase}</span>
+                                            </li>
+                                            <li className="w-full flex justify-between items-center text-gray-100 font-Bebas text-xl">
+                                                <span className="text-[#897AF0]">lyrics</span>
+                                                <span>{UsersArtist[0]?.lyrics}</span>
+                                            </li>
+                                            <li className="w-full flex justify-between items-center text-gray-100 font-Bebas text-xl">
+                                                <span className="text-[#897AF0]">charisma</span>
+                                                <span>{UsersArtist[0]?.charisma}</span>
+                                            </li>
+                                            <li className="w-full flex justify-between items-center text-gray-100 font-Bebas text-xl">
+                                                <span className="text-[#897AF0]">flow</span>
+                                                <span>{UsersArtist[0]?.flow}</span>
+                                            </li>
+                                        </ul>
                                     </div>
-                                    <h1 className="text-gray-100 font-Bebas md:text-2xl text-xl text-center">MI Abaga</h1>
-                                    <ul className="w-full flex flex-col gap-2 px-3 list-none">
-                                        <li className="w-full flex justify-between items-center text-gray-100 font-Bebas text-xl">
-                                            <span className="text-[#897AF0]">Rap points</span>
-                                            <span>3</span>
-                                        </li>
-                                        <li className="w-full flex justify-between items-center text-gray-100 font-Bebas text-xl">
-                                            <span className="text-[#897AF0]">Battle wins</span>
-                                            <span>98</span>
-                                        </li>
-                                        <li className="w-full flex justify-between items-center text-gray-100 font-Bebas text-xl">
-                                            <span className="text-[#897AF0]">fan base</span>
-                                            <span>98</span>
-                                        </li>
-                                        <li className="w-full flex justify-between items-center text-gray-100 font-Bebas text-xl">
-                                            <span className="text-[#897AF0]">lyrics</span>
-                                            <span>98</span>
-                                        </li>
-                                        <li className="w-full flex justify-between items-center text-gray-100 font-Bebas text-xl">
-                                            <span className="text-[#897AF0]">charisma</span>
-                                            <span>98</span>
-                                        </li>
-                                        <li className="w-full flex justify-between items-center text-gray-100 font-Bebas text-xl">
-                                            <span className="text-[#897AF0]">flow</span>
-                                            <span>98</span>
-                                        </li>
-                                    </ul>
                                 </div>
-                            </div>
+                            }
+
+                            {thisUser?.userType == 0 &&
+                                <div className="w-full md:px-6 px-4 py-8">
+                                    <div className="w-full p-[40px] flex flex-col gap-2 rounded-lg bg-[#FFFFFF]/[5%] border border-[#FFFFFF]/[10%]">
+                                        <div className="w-full h-[343px]">
+                                            <Image src={fanNFT} alt='image' width={1184} height={1396} quality={100} priority className='w-full h-full' />
+                                        </div>
+                                        <h1 className="text-gray-100 font-Bebas md:text-2xl text-xl text-center">{thisUser.username}</h1>
+                                    </div>
+                                </div>
+                            }
                         </main>
                     </motion.div>
                 )}

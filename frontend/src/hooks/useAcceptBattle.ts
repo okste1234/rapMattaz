@@ -12,12 +12,13 @@ type ErrorWithReason = {
   message?: string;
 };
 
-const useCreateBattle = () => {
+const useAcceptBattle = () => {
   const { chainId } = useWeb3ModalAccount();
   const { walletProvider } = useWeb3ModalProvider();
 
+
   return useCallback(
-    async (opponent:any) => {
+    async(battleId:number, time:number, link:string) => {
       if (!isSupportedChain(chainId)) return toast.warning("wrong network | Connect your wallet");
       const readWriteProvider = getProvider(walletProvider);
       const signer = await readWriteProvider.getSigner();
@@ -25,26 +26,28 @@ const useCreateBattle = () => {
       const contract = getBattleZoneContract(signer);
 
       try {
-        const transaction = await contract.createBattle(opponent);
+        const transaction = await contract.acceptBattle(battleId,time,link);
         const receipt = await transaction.wait();
 
-        // console.log("receipt: ", receipt);
-
         if (receipt.status) {
-          // return toast.success("created successfully!");
+          return toast.success("battle declined!");
         }
 
-        toast.error("registeration failed!");
+        toast.error("failed!");
       } catch (error: unknown) {
         // console.log(error);
         const err = error as ErrorWithReason;
         let errorText: string;
 
-        if (err?.reason === "Only rappers can be challenged") {
-          errorText = "only rappers can be challenged!";
+        if (err?.reason === "Only the opponent can accept") {
+          errorText = "only the opponent can decline!";
         }
-        else if (err?.reason === "Only rappers can create battles") {
-          errorText = "only rappers can create battles";
+        else if (err?.reason === "Battle is not in pending state") {
+          errorText = "only pending battles can be acccepted!";
+        }
+        else if (err?.reason === "Accept deadline has passed") {
+          errorText = "can't accept battle, timeout error";
+          
         }
         else {
             // console.log(err?.message);
@@ -59,4 +62,4 @@ const useCreateBattle = () => {
   );
 };
 
-export default useCreateBattle;
+export default useAcceptBattle;

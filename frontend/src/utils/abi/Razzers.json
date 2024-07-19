@@ -533,6 +533,76 @@
     {
         "inputs": [
             {
+                "internalType": "uint256",
+                "name": "_userId",
+                "type": "uint256"
+            }
+        ],
+        "name": "getUserById",
+        "outputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "address",
+                        "name": "wallet",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "username",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "imageURL",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "enum Razzers.UserType",
+                        "name": "userType",
+                        "type": "uint8"
+                    },
+                    {
+                        "internalType": "address[]",
+                        "name": "following",
+                        "type": "address[]"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "hasClaimedRAVT",
+                        "type": "bool"
+                    }
+                ],
+                "internalType": "struct Razzers.User",
+                "name": "",
+                "type": "tuple"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "_userAddress",
+                "type": "address"
+            }
+        ],
+        "name": "getUserIdByAddress",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
                 "internalType": "address",
                 "name": "account",
                 "type": "address"
@@ -576,6 +646,19 @@
     {
         "inputs": [],
         "name": "nextTokenId",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "nextUserId",
         "outputs": [
             {
                 "internalType": "uint256",
@@ -873,6 +956,64 @@
                 "internalType": "string",
                 "name": "",
                 "type": "string"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "name": "userById",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "wallet",
+                "type": "address"
+            },
+            {
+                "internalType": "string",
+                "name": "username",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "imageURL",
+                "type": "string"
+            },
+            {
+                "internalType": "enum Razzers.UserType",
+                "name": "userType",
+                "type": "uint8"
+            },
+            {
+                "internalType": "bool",
+                "name": "hasClaimedRAVT",
+                "type": "bool"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "name": "userIdByAddress",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
             }
         ],
         "stateMutability": "view",

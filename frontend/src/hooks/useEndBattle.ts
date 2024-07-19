@@ -12,12 +12,13 @@ type ErrorWithReason = {
   message?: string;
 };
 
-const useCreateBattle = () => {
+const useEndBattle = () => {
   const { chainId } = useWeb3ModalAccount();
   const { walletProvider } = useWeb3ModalProvider();
 
+
   return useCallback(
-    async (opponent:any) => {
+    async(battleId:number) => {
       if (!isSupportedChain(chainId)) return toast.warning("wrong network | Connect your wallet");
       const readWriteProvider = getProvider(walletProvider);
       const signer = await readWriteProvider.getSigner();
@@ -25,26 +26,24 @@ const useCreateBattle = () => {
       const contract = getBattleZoneContract(signer);
 
       try {
-        const transaction = await contract.createBattle(opponent);
+        const transaction = await contract.endBattle(battleId);
         const receipt = await transaction.wait();
 
-        // console.log("receipt: ", receipt);
-
         if (receipt.status) {
-          // return toast.success("created successfully!");
+          return toast.success("ended successfully!");
         }
 
-        toast.error("registeration failed!");
+        toast.error("failed!");
       } catch (error: unknown) {
         // console.log(error);
         const err = error as ErrorWithReason;
         let errorText: string;
 
-        if (err?.reason === "Only rappers can be challenged") {
-          errorText = "only rappers can be challenged!";
+        if (err?.reason === "Battle is not in accepted state") {
+          errorText = "challenge has not started!";
         }
-        else if (err?.reason === "Only rappers can create battles") {
-          errorText = "only rappers can create battles";
+        else if (err?.reason === "Battle has not ended") {
+          errorText = "battle time still on!";
         }
         else {
             // console.log(err?.message);
@@ -59,4 +58,4 @@ const useCreateBattle = () => {
   );
 };
 
-export default useCreateBattle;
+export default useEndBattle;

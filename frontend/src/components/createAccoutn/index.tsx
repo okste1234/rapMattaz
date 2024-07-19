@@ -19,7 +19,7 @@ const CreateAccount = () => {
 
     const details = useGetStatus()
 
-    if (details === true) {
+    if (details?.hasClaimedRAVT === true) {
         router.push('/battles')
     }
 

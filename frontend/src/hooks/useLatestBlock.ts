@@ -1,5 +1,6 @@
 "use client"
 
+import { envVars } from "@/utils/env";
 import { ethers } from "ethers";
 import { useEffect, useState } from "react";
 
@@ -7,7 +8,7 @@ export function useLatestBlock() {
     const [blockNumber, setBlockNumber] = useState(undefined);
     useEffect(() => {
         const wssProvider = new ethers.WebSocketProvider(
-            process.env.NEXT_PUBLIC__WSS_RPC_URL || ""
+            envVars.wssRPC || ""
         );
         // console.log("wssProvider: ", wssProvider);
         const onBlock = (newBlockNumber:any) => setBlockNumber(newBlockNumber);

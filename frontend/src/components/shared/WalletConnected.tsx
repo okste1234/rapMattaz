@@ -3,7 +3,7 @@ import { useWeb3ModalAccount } from "@web3modal/ethers/react"
 import Image, { StaticImageData } from "next/image"
 
 
-export const WalletConnected = ({ username, icon }: { username: string | undefined, icon: StaticImageData }) => {
+export const WalletConnected = ({ username, icon }: { username: string | undefined, icon: any }) => {
     const { chainId } = useWeb3ModalAccount()
     return (
         <span className="flex items-center gap-1.5">
@@ -13,7 +13,7 @@ export const WalletConnected = ({ username, icon }: { username: string | undefin
                 ) : (
                     <>
                         <span className="w-[28px] h-[28px] rounded-full overflow-hidden">
-                            <Image src={icon} alt="Profile Icon" className="w-full h-full" width={160} height={160} quality={100} priority />
+                            <img src={icon} alt="Profile Icon" className="w-full h-full" width={160} height={160}/>
                         </span>
                         <span>{username}</span>
                     </>
