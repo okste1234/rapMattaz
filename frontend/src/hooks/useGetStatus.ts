@@ -13,13 +13,11 @@ import { getRazzersContract } from "@/utils/contract";
 import { readOnlyProvider } from "@/utils/provider";
 import { useWeb3ModalAccount } from "@web3modal/ethers/react";
 import { useEffect, useState } from "react";
-import { useLatestBlock } from "./useLatestBlock";
 
 const useGetStatus = () => {
   const [data, setData] = useState<User | null>(null);
   const { address } = useWeb3ModalAccount();
 
-  const newBlock = useLatestBlock();
 
   useEffect(() => {
     const fetchUserStatus = async () => {
@@ -35,7 +33,7 @@ const useGetStatus = () => {
     if (address) {
       fetchUserStatus();
     }
-  }, [address,newBlock]);
+  }, [address]);
 
   return data;
 };

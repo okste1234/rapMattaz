@@ -23,7 +23,7 @@ import useBalanceOf from '@/hooks/useBalanceOf'
 
 
 const UpcomingBattles = () => {
-    const { address } = useWeb3ModalAccount();
+    const { address,isConnected } = useWeb3ModalAccount();
 
     // create challenge modal state
     const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -45,7 +45,14 @@ const UpcomingBattles = () => {
 
     const upcomingBattles = useMemo(() => Battles, [])
 
-
+    // useEffect(() => {
+    //  if (isConnected) {
+    //     console.log("jjj");
+        
+    //  }
+      
+    // }, [thisUser])
+    
     useEffect(() => {
         document.body.style.overflow = isOpen ? 'hidden' : 'auto';
 
