@@ -1,8 +1,6 @@
 import { envVars } from "@/utils/env";
 import { NextRequest, NextResponse } from "next/server";
 
-// const NEXT_PUBLIC_URL = process.env.NEXT_PUBLIC_URL; // Ensure this variable is correctly set in your environment
-const postUrl = `${envVars.hostUrl}/api/chat`;
 
 export async function POST(req: NextRequest) {
   return new NextResponse(
@@ -11,12 +9,12 @@ export async function POST(req: NextRequest) {
           <head>
             <title>Let FLock it up</title>
             <meta property="og:title" content="Let FLock it up" />
-            <meta property="og:image" content="${envVars.hostUrl}/pic.png />
+            <meta property="og:image" content=${envVars.hostUrl}/pic.png />
             <meta property="fc:frame" content="vNext" />
             <meta property="fc:frame:image" content="${envVars.hostUrl}/pic.png" />
             <meta property="fc:frame:input:text" content="What is solana?" />
             <meta property="fc:frame:button:1" content="Ask me" />
-            <meta property="fc:frame:post_url" content="${postUrl}" />
+            <meta property="fc:frame:post_url" content=${envVars.hostUrl}/api/chat />
           </head>
           <body/>
         </html>`,
