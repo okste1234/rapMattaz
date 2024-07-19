@@ -90,7 +90,7 @@ const CreateAccount = () => {
                     </p>
                 </div>
 
-                <form onSubmit={handleSubmit} className="flex flex-col gap-3 items-center my-5">
+                <form onSubmit={handleSubmit} className="flex flex-col gap-3 items-center my-5 w-full">
                     <div className="w-[110px] h-[110px] rounded-full overflow-hidden">
                         {selectedFile ? (
                             <Image

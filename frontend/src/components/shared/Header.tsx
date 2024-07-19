@@ -18,13 +18,14 @@ import { IoIosNotificationsOutline } from "react-icons/io";
 import useGetAllUsersAndBattles from "@/hooks/useGetAllUsersAndBattles";
 import useGetStatus from "@/hooks/useGetStatus";
 import useBalanceOf from "@/hooks/useBalanceOf";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
     const { userInfo, battleInfo, rapperInfo, loading, } = useGetAllUsersAndBattles()
     const thisUser = useGetStatus()
     const ravtBal = useBalanceOf()
 
-
+    const router = useRouter()
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const [openNotification, setOpenNotification] = useState<boolean>(false)
 
@@ -45,10 +46,22 @@ const Header = () => {
             open()
         } else if (isConnected && chainId !== SUPPORTED_CHAIN_ID) {
             switchNetwork(SUPPORTED_CHAIN_ID)
-        } else {
+            
+        }
+        else if (isConnected && address != thisUser?.wallet) {
+            router.push('/signin')
+        }
+        else {
             setIsOpen(!isOpen)
         }
     }
+
+    useEffect(() => {
+        if (address != thisUser?.wallet) {
+            router.push('/signin')
+        }   
+    }, [thisUser, address])
+    
 
     const formatAddress = (address: string | undefined) => {
         return `${address?.slice(0, 6)}...${address?.slice(-4)}`

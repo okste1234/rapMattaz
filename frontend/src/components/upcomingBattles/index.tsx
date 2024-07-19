@@ -77,8 +77,8 @@ const UpcomingBattles = () => {
     const handleSendingChallenge = () => {
         setIsModalOpen(!isModalOpen)
         setIsOpen(!isOpen)
-        createBattle(artistAdddress);
-        toast.success("Challenge Sent");
+        // createBattle(artistAdddress);
+        toast.success("Challenge Sent -Test");
     }
 
     const handleStartingChallenge = (nameArt:string, addressArt:any) => {

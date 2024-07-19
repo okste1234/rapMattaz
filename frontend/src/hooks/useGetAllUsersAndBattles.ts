@@ -17,7 +17,7 @@ const useGetAllUsersAndBattles = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | null>(null);
 
-//   const newBlock = useLatestBlock();
+  const newBlock = useLatestBlock();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -153,7 +153,7 @@ const useGetAllUsersAndBattles = () => {
     };
 
     fetchData();
-  }, []);
+  }, [newBlock]);
 
   return { userInfo, battleInfo,rapperInfo, loading, error };
 };
