@@ -13,7 +13,7 @@ export async function POST(req: NextRequest) {
             <meta property="og:title" content="Let FLock it up" />
             <meta property="og:image" content="${envVars.hostUrl}/pic.png />
             <meta property="fc:frame" content="vNext" />
-            <meta property="fc:frame:image" content="${envVars.hostUrl}/api/images/chat" />
+            <meta property="fc:frame:image" content="${envVars.hostUrl}/pic.png" />
             <meta property="fc:frame:input:text" content="What is solana?" />
             <meta property="fc:frame:button:1" content="Ask me" />
             <meta property="fc:frame:post_url" content="${postUrl}" />
