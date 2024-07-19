@@ -1,5 +1,5 @@
 'use client'
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Logo from "../shared/Logo"
 import Image from "next/image";
 import placeholder from "../../../public/placeholder.png"
@@ -8,13 +8,15 @@ import useGetStatus from "@/hooks/useGetStatus";
 import { useWeb3ModalAccount } from "@web3modal/ethers/react";
 import axios from "axios";
 import { toast } from "sonner";
+import { isSupportedChain } from "@/utils/chain";
 
 
 const CreateAccount = () => {
     const [selectedFile, setSelectedFile] = useState<any>();
     const [username, setUsername] = useState<string>("")
     const [isLoading, setIsLoading] = useState(false);
-    const { address } = useWeb3ModalAccount();
+
+    const { address,chainId, isConnected } = useWeb3ModalAccount();
     const router = useRouter()
 
     const details = useGetStatus()
@@ -22,16 +24,17 @@ const CreateAccount = () => {
     if (details?.hasClaimedRAVT === true) {
         router.push('/battles')
     }
-
+    
+    
     const handleSelectImage = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length > 0) {
             setSelectedFile(e.target.files[0]);
         }
     };
-
+    
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
+        if (!isConnected && !isSupportedChain(chainId)) return toast.warning("wrong network | Connect your wallet"); 
         try {
           setIsLoading(true);
           if (isLoading) {
@@ -129,6 +132,7 @@ const CreateAccount = () => {
                         <input type="text" name="username" id="username" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Enter your username" className="w-full py-2.5 px-3 border border-[#FFFFFF]/[10%] rounded-md bg-transparent font-extralight text-sm placeholder:text-[#ffffff]/[40%] transition-all duration-200 focus:border-[#ffffff]/[30%] text-gray-100 outline-none" />
                     </div>
 
+                  
                     <button type="submit" className="w-full h-[52px] flex items-center justify-center gap-1 bg-gradient-to-t from-[#503BE8] via-[#6957EB] to-[#715FEC] uppercase font-Bebas hover:tracking-widest transition-all duration-200 rounded-md text-gray-50">
                         Create Account
                     </button>

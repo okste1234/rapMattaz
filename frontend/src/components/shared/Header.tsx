@@ -95,7 +95,7 @@ const Header = () => {
                     type="button"
                     className={`py-1 border font-Bebas rounded-md text-sm md:text-base uppercase text-gray-50 ${isConnected ? "px-4 border-[#FFFFFF]/[15%]" : "bg-gradient-to-t from-[#503BE8] via-[#6957EB] to-[#715FEC] border-[#503BE8] px-6"}`}>
                     {
-                        isConnected ? <WalletConnected username={thisUser?.username} icon={thisUser?.imageURL} />
+                        isConnected ? <WalletConnected username={thisUser?.username || "signin"} icon={thisUser?.imageURL || "/logo.png"} />
                             : <span>Connect Wallet</span>
                     }
                 </button>
@@ -150,7 +150,7 @@ const Header = () => {
                                                 quality={100}
                                             />
                                         ) : (
-                                            <img src={thisUser?.imageURL} alt="Profile Image" className="w-full h-full rounded-full" width={220} height={220} />
+                                            <img src={thisUser?.imageURL || "/logo.png"} alt="Profile Image" className="w-full h-full rounded-full" width={220} height={220} />
                                         )}
                                         <input
                                             type="file"
